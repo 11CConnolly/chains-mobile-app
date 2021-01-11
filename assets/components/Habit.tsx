@@ -1,10 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const Habit = (props: any) => {
+type HabitType = {
+  text: string;
+};
+
+const Habit = ({ text }: HabitType) => {
   return (
     <View style={styles.circle}>
-      <Text style={styles.chainText}>Simple Chain</Text>
+      <Text style={styles.chainText}>{text}</Text>
     </View>
   );
 };

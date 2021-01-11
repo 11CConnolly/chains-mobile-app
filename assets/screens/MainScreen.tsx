@@ -1,15 +1,19 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import Habit from "../components/Habit";
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, SafeAreaView } from "react-native";
+import Chain from "../components/Chain";
 
 const MainScreen = () => {
   const [chains, setChains] = useState(0);
 
   return (
-    <View style={styles.container}>
-      <Text>Welcome to the Chains App! Start buliding habits now...</Text>
-      <Habit />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.chains}>
+        <Chain />
+        <Chain />
+        <Chain />
+        <Chain />
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -19,6 +23,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  chains: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "baseline",
+    justifyContent: "space-around",
   },
 });
 
