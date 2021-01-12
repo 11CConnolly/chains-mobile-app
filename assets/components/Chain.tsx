@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     flexWrap: "nowrap",
+    borderColor: "black",
+    borderStyle: "dashed",
+    borderWidth: 1,
   },
 });
 

@@ -12,6 +12,9 @@ const MainScreen = () => {
         <Chain />
         <Chain />
         <Chain />
+        <Chain />
+        <Chain />
+        <Chain />
       </View>
     </SafeAreaView>
   );
@@ -27,8 +30,10 @@ const styles = StyleSheet.create({
   chains: {
     flex: 1,
     flexDirection: "column",
-    alignItems: "baseline",
-    justifyContent: "space-around",
+    flexWrap: "nowrap",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    alignContent: "flex-start",
   },
 });
 
