@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import ActionDialog from "./ActionDialog";
 
 type HabitType = {
   text: string;
@@ -8,11 +9,15 @@ type HabitType = {
 const Habit = ({ text }: HabitType) => {
   const [complete, setComplete] = useState<Boolean>(false);
 
+  const handleOnLongPress = () => {
+    return <ActionDialog text="Are you sure you want to delete this habit?" />;
+  };
+
   return (
     <TouchableOpacity
       style={complete ? styles.completeHabit : styles.uncompleteHabit}
       onPress={() => setComplete(!complete)}
-      onLongPress={() => console.log("Editting")}
+      onLongPress={() => handleOnLongPress()}
     >
       <Text style={styles.chainText}>{text}</Text>
     </TouchableOpacity>

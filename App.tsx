@@ -1,7 +1,12 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import MainScreen from "./assets/screens/MainScreen";
+import { AppRegistry } from "react-native";
+import { Provider as PaperProvider } from "react-native-paper";
+import MainScreen from "./src/screens/MainScreen";
 
 export default function App() {
-  return <MainScreen />;
+  return (
+    <PaperProvider>
+      <MainScreen />
+    </PaperProvider>
+  );
 }
