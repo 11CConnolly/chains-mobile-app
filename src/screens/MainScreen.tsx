@@ -20,6 +20,7 @@ const MainScreen = () => {
   );
 };
 
+// TODO Add some padding to the top, as difficulties displaying on device
 const styles = StyleSheet.create({
   container: {
     flex: 1,
