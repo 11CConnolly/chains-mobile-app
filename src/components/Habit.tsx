@@ -9,15 +9,11 @@ type HabitType = {
 const Habit = ({ text }: HabitType) => {
   const [complete, setComplete] = useState<Boolean>(false);
 
-  const handleOnLongPress = () => {
-    return <ActionDialog text="Are you sure you want to delete this habit?" />;
-  };
-
   return (
     <TouchableOpacity
       style={complete ? styles.completeHabit : styles.uncompleteHabit}
       onPress={() => setComplete(!complete)}
-      onLongPress={() => handleOnLongPress()}
+      onLongPress={() => console.log("Long Press")}
     >
       <Text style={styles.chainText}>{text}</Text>
     </TouchableOpacity>
@@ -26,22 +22,20 @@ const Habit = ({ text }: HabitType) => {
 
 const styles = StyleSheet.create({
   uncompleteHabit: {
-    backgroundColor: "red",
+    backgroundColor: "#e74c3c",
+    margin: 2,
     height: 100,
     width: 100,
     borderRadius: 50,
-    borderWidth: 2,
-    borderColor: "black",
     alignItems: "center",
     justifyContent: "center",
   },
   completeHabit: {
-    backgroundColor: "green",
+    backgroundColor: "#2ecc71",
+    margin: 2,
     height: 100,
     width: 100,
     borderRadius: 50,
-    borderWidth: 2,
-    borderColor: "black",
     alignItems: "center",
     justifyContent: "center",
   },

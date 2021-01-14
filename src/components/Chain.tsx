@@ -21,6 +21,9 @@ const Chain = (props: any) => {
       {
         text: "3",
       },
+      {
+        text: "4",
+      },
     ]);
   }, []);
 
@@ -40,9 +43,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     flexWrap: "nowrap",
-    borderColor: "black",
-    borderStyle: "dashed",
-    borderWidth: 1,
   },
 });
 
