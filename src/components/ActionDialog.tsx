@@ -14,8 +14,12 @@ const ActionDialog = (text: any) => {
       <Dialog visible={visible} onDismiss={hideDialog}>
         <Text>{text}</Text>
         <Dialog.Actions>
-          <Button onPress={() => console.log("Cancel")}>Cancel</Button>
-          <Button onPress={() => console.log("Ok")}>Ok</Button>
+          <Button onPress={() => console.log("Cancel")}>
+            <Text>Cancel</Text>
+          </Button>
+          <Button onPress={() => console.log("Ok")}>
+            <Text>Ok</Text>
+          </Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>

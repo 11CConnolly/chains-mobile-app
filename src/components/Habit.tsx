@@ -7,15 +7,21 @@ type HabitType = {
 };
 
 const Habit = ({ text }: HabitType) => {
-  const [complete, setComplete] = useState<Boolean>(false);
+  const [complete, setComplete] = useState<boolean>(false);
+
+  const [showDialog, setShowDialog] = useState<boolean>(false);
 
   return (
     <TouchableOpacity
       style={complete ? styles.completeHabit : styles.uncompleteHabit}
       onPress={() => setComplete(!complete)}
-      onLongPress={() => console.log("Long Press")}
+      onLongPress={() => setShowDialog(true)}
     >
       <Text style={styles.chainText}>{text}</Text>
+      // TODO Include callback function
+      {showDialog && (
+        <ActionDialog text="Are you sure you want to delete this Habit?" />
+      )}
     </TouchableOpacity>
   );
 };
