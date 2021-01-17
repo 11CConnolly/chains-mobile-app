@@ -12,8 +12,8 @@ export type HabitType = {
 const Chain = (props: any) => {
   const [habitList, setHabitList] = useState<HabitType[]>([]);
 
-  // Set the initial state once
   // TODO Replace with dynamic list
+  // Set the initial state once
   useEffect(() => {
     setHabitList([
       {
@@ -47,7 +47,15 @@ const Chain = (props: any) => {
   const tryMarkHabitAsComplete = (index: number) => {
     setHabitList((list) =>
       list.map((habit, i) =>
-        i === index ? { ...habit, isComplete: true } : habit
+        i === index
+          ? {
+              ...habit,
+              isComplete:
+                index === 0 || list[index - 1].isComplete === true
+                  ? true
+                  : false,
+            }
+          : habit
       )
     );
   };
@@ -59,7 +67,6 @@ const Chain = (props: any) => {
       {habitList.map((habit) => (
         <Habit key={habitKeyCount++} {...habit} />
       ))}
-      {console.log(habitList)}
     </View>
   );
 };

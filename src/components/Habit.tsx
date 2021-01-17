@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   completeHabit: {
-    backgroundColor: "#000000",
+    backgroundColor: "#27ae60",
     margin: 2,
     height: 100,
     width: 100,
