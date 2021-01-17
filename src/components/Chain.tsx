@@ -1,5 +1,6 @@
 import React, { useState, useEffect, SetStateAction } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { ChainToDisplay } from "./ChainsDisplay";
 import Habit from "./Habit";
 
 export type HabitType = {
@@ -43,7 +44,7 @@ const Chain = (props: any) => {
     ]);
   }, []);
 
-  // Only is previous item is complete, let habit be marked as complete
+  // Only is previous item is complete, or is first habit, let habit be marked as complete
   const tryMarkHabitAsComplete = (index: number) => {
     setHabitList((list) =>
       list.map((habit, i) =>
