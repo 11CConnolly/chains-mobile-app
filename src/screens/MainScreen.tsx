@@ -8,15 +8,14 @@ import {
   Platform,
 } from "react-native";
 import Chain from "../components/Chain";
+import ChainsDisplay from "../components/ChainsDisplay";
 import { TopBar } from "../components/TopBar";
 
 const MainScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <TopBar />
-      <View style={styles.chains}>
-        <Chain />
-      </View>
+      <ChainsDisplay />
     </SafeAreaView>
   );
 };
@@ -29,15 +28,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#ecf0f1",
     alignItems: "center",
     justifyContent: "center",
-  },
-  chains: {
-    flex: 1,
-    alignSelf: "flex-start",
-    flexDirection: "column",
-    flexWrap: "nowrap",
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
-    alignContent: "flex-start",
   },
 });
 

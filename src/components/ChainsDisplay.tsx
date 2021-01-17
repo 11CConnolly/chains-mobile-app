@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Chain, { HabitType } from "./Chain";
 
 export type ChainToDisplay = {
@@ -20,13 +20,27 @@ const ChainsDisplay = () => {
     ]);
   }, []);
 
+  let chainKeyCount = 0;
+
   return (
-    <View>
+    <View style={styles.container}>
       {chains.map((chain) => (
-        <Chain />
+        <Chain key={chainKeyCount++} />
       ))}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignSelf: "flex-start",
+    flexDirection: "column",
+    flexWrap: "nowrap",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    alignContent: "flex-start",
+  },
+});
 
 export default ChainsDisplay;
