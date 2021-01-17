@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { HabitType } from "./Chain";
 
 const Habit = ({ text, index, isComplete, tryMarkHabit }: HabitType) => {
-  const [complete, setComplete] = useState<boolean>(false);
-
   return (
     <TouchableOpacity
-      style={complete ? styles.completeHabit : styles.uncompleteHabit}
+      style={isComplete ? styles.completeHabit : styles.uncompleteHabit}
       onPress={() => tryMarkHabit(index)}
     >
       <Text style={styles.chainText}>{text}</Text>

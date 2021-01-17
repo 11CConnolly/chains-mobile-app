@@ -45,13 +45,11 @@ const Chain = (props: any) => {
 
   // Only is previous item is complete, let habit be marked as complete
   const tryMarkHabitAsComplete = (index: number) => {
-    let list: HabitType[] = [...habitList];
-    let habit = {
-      ...list[index],
-      isComplete: true,
-    };
-    list[index] = habit;
-    setHabitList(list);
+    setHabitList((list) =>
+      list.map((habit, i) =>
+        i === index ? { ...habit, isComplete: true } : habit
+      )
+    );
   };
 
   let habitKeyCount = 0;
@@ -61,6 +59,7 @@ const Chain = (props: any) => {
       {habitList.map((habit) => (
         <Habit key={habitKeyCount++} {...habit} />
       ))}
+      {console.log(habitList)}
     </View>
   );
 };
