@@ -13,6 +13,7 @@ const Chain = (props: any) => {
   const [habitList, setHabitList] = useState<HabitType[]>([]);
 
   // Set the initial state once
+  // TODO Replace with dynamic list
   useEffect(() => {
     setHabitList([
       {
@@ -50,7 +51,7 @@ const Chain = (props: any) => {
       isComplete: true,
     };
     list[index] = habit;
-    setHabitList(...(list as HabitType[]));
+    setHabitList(list);
   };
 
   let habitKeyCount = 0;
