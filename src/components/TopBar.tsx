@@ -2,11 +2,11 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import BurgerMenu from "./BurgerMenu";
 
-export const TopBar = (chainCount: any) => {
+export const TopBar = (props: any) => {
   return (
     <View style={styles.topBar}>
       <BurgerMenu />
-      <Text style={styles.chainCount}>0</Text>
+      <Text style={styles.chainCount}>{props.count}</Text>
       <BurgerMenu />
     </View>
   );

@@ -7,15 +7,20 @@ import {
   StatusBar,
   Platform,
 } from "react-native";
-import Chain from "../components/Chain";
 import ChainsDisplay from "../components/ChainsDisplay";
 import { TopBar } from "../components/TopBar";
 
 const MainScreen = () => {
+  const [counter, setCounter] = useState<number>(0);
+
+  const incrementCounter = () => {
+    setCounter(counter + 1);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <TopBar />
-      <ChainsDisplay />
+      <TopBar count={counter} />
+      <ChainsDisplay incCounter={incrementCounter} />
     </SafeAreaView>
   );
 };

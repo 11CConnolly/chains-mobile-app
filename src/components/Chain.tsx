@@ -44,8 +44,8 @@ const Chain = (props: any) => {
     ]);
   }, []);
 
-  // Only is previous item is complete, or is first habit, let habit be marked as complete
   const tryMarkHabitAsComplete = (index: number) => {
+    // Only is previous item is complete, or is first habit, let habit be marked as complete
     setHabitList((list) =>
       list.map((habit, i) =>
         i === index
@@ -59,6 +59,9 @@ const Chain = (props: any) => {
           : habit
       )
     );
+
+    // Final habit, mark chain as complete
+    if (habitList.length === index) props.markChainAsComplete();
   };
 
   let habitKeyCount = 0;
@@ -74,7 +77,10 @@ const Chain = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    display: "flex",
+    height: 100,
+    paddingTop: 5,
+    marginBottom: 10,
     flexDirection: "row",
     flexWrap: "nowrap",
   },
