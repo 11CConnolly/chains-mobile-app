@@ -1,58 +1,43 @@
 import React, { useState, useEffect, SetStateAction } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { ChainToDisplay } from "./ChainsDisplay";
+import { ChainType } from "./ChainsDisplay";
 import Habit from "./Habit";
 
 export type HabitType = {
   text: string;
   index: number;
   isComplete: boolean;
-  tryMarkHabit: (index: number) => void;
+  tryMarkHabit?: (index: number) => void;
 };
 
-const Chain = (props: any) => {
+const Chain = ({
+  index,
+  isComplete,
+  habits,
+  markChainAsComplete,
+}: ChainType) => {
   const [habitList, setHabitList] = useState<HabitType[]>([]);
 
   // TODO Replace with dynamic list
   // Set the initial state once
   useEffect(() => {
-    setHabitList([
-      {
-        text: "1",
-        index: 0,
-        isComplete: false,
-        tryMarkHabit: tryMarkHabitAsComplete,
-      },
-      {
-        text: "2",
-        index: 1,
-        isComplete: false,
-        tryMarkHabit: tryMarkHabitAsComplete,
-      },
-      {
-        text: "3",
-        index: 2,
-        isComplete: false,
-        tryMarkHabit: tryMarkHabitAsComplete,
-      },
-      {
-        text: "4",
-        index: 3,
-        isComplete: false,
-        tryMarkHabit: tryMarkHabitAsComplete,
-      },
-    ]);
+    // Attach habits w/ method to mark it as complete
+    let initHabits = [...habits];
+    initHabits.forEach((habit) => {
+      habit.tryMarkHabit = tryMarkHabitAsComplete;
+    });
+    setHabitList(initHabits);
   }, []);
 
-  const tryMarkHabitAsComplete = (index: number) => {
+  const tryMarkHabitAsComplete = (habitIndex: number) => {
     // Only is previous item is complete, or is first habit, let habit be marked as complete
     setHabitList((list) =>
       list.map((habit, i) =>
-        i === index
+        i === habitIndex
           ? {
               ...habit,
               isComplete:
-                index === 0 || list[index - 1].isComplete === true
+                habitIndex === 0 || list[habitIndex - 1].isComplete === true
                   ? true
                   : false,
             }
@@ -61,7 +46,10 @@ const Chain = (props: any) => {
     );
 
     // Final habit, mark chain as complete
-    if (habitList.length === index) props.markChainAsComplete();
+    console.log(habitList.length + " - length and index - " + habitIndex);
+    if (habitList.length === habitIndex) {
+      markChainAsComplete(index);
+    }
   };
 
   let habitKeyCount = 0;

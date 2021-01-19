@@ -7,8 +7,13 @@ import {
   StatusBar,
   Platform,
 } from "react-native";
-import ChainsDisplay from "../components/ChainsDisplay";
+import ChainsDisplay, { ChainType } from "../components/ChainsDisplay";
 import { TopBar } from "../components/TopBar";
+
+export type DisplayChainsType = {
+  incCounter: () => void;
+  chains: ChainType[];
+};
 
 const MainScreen = () => {
   const [counter, setCounter] = useState<number>(0);
@@ -20,7 +25,7 @@ const MainScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <TopBar count={counter} />
-      <ChainsDisplay incCounter={incrementCounter} />
+      <ChainsDisplay incCounter={incrementCounter} chains={[]} />
     </SafeAreaView>
   );
 };

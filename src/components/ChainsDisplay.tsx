@@ -1,30 +1,63 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import Chain, { HabitType } from "./Chain";
+import { DisplayChainsType } from "../screens/MainScreen";
 
-export type ChainToDisplay = {
+export type ChainType = {
   index: number;
-  habits: HabitType[];
   isComplete: boolean;
+  habits: HabitType[];
+  markChainAsComplete: (index: number) => void;
 };
 
-const ChainsDisplay = (incCounter: any) => {
-  const [chains, setChains] = useState<ChainToDisplay[]>([]);
+const ChainsDisplay = ({ incCounter, chains }: DisplayChainsType) => {
+  const [chainList, setChainsList] = useState<ChainType[]>([]);
 
-  // TODO Refactor to dynamic list
+  const dummyHabitArr: HabitType[] = [
+    {
+      text: "1",
+      index: 0,
+      isComplete: false,
+    },
+    {
+      text: "2",
+      index: 1,
+      isComplete: false,
+    },
+    {
+      text: "3",
+      index: 2,
+      isComplete: false,
+    },
+    {
+      text: "4",
+      index: 3,
+      isComplete: false,
+    },
+  ];
+
   // Dummy values reading in
   useEffect(() => {
-    setChains([
-      { index: 0, habits: [], isComplete: false },
-      { index: 1, habits: [], isComplete: false },
-      { index: 2, habits: [], isComplete: false },
+    setChainsList([
+      {
+        index: 0,
+        habits: dummyHabitArr,
+        isComplete: false,
+        markChainAsComplete: markChainAsComplete,
+      },
+      {
+        index: 1,
+        habits: dummyHabitArr,
+        isComplete: false,
+        markChainAsComplete: markChainAsComplete,
+      },
     ]);
   }, []);
 
   let chainKeyCount = 0;
 
   const markChainAsComplete = (index: number) => {
-    setChains((list) =>
+    setChainsList((list) =>
       list.map((chain, i) =>
         i === index
           ? {
@@ -35,12 +68,12 @@ const ChainsDisplay = (incCounter: any) => {
       )
     );
 
-    if (chains[index].isComplete) incCounter();
+    if (chainList[index].isComplete) incCounter();
   };
 
   return (
     <View style={styles.container}>
-      {chains.map((chain) => (
+      {chainList.map((chain) => (
         <Chain key={chainKeyCount++} {...chain} />
       ))}
     </View>
