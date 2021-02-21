@@ -11,8 +11,6 @@ export type ChainType = {
 };
 
 const ChainsDisplay = ({ incCounter, chains }: DisplayChainsType) => {
-  const [chainList, setChainsList] = useState<ChainType[]>([]);
-
   const dummyHabitArr: HabitType[] = [
     {
       text: "1",
@@ -36,26 +34,6 @@ const ChainsDisplay = ({ incCounter, chains }: DisplayChainsType) => {
     },
   ];
 
-  // Dummy values reading in
-  useEffect(() => {
-    setChainsList([
-      {
-        index: 0,
-        habits: dummyHabitArr,
-        isComplete: false,
-        markChainAsComplete: markChainAsComplete,
-      },
-      {
-        index: 1,
-        habits: dummyHabitArr,
-        isComplete: false,
-        markChainAsComplete: markChainAsComplete,
-      },
-    ]);
-  }, []);
-
-  let chainKeyCount = 0;
-
   const markChainAsComplete = (index: number) => {
     setChainsList((list) =>
       list.map((chain, i) =>
@@ -71,10 +49,31 @@ const ChainsDisplay = ({ incCounter, chains }: DisplayChainsType) => {
     if (chainList[index].isComplete) incCounter();
   };
 
+  const [chainList, setChainsList] = useState<ChainType[]>([
+    {
+      index: 0,
+      habits: dummyHabitArr,
+      isComplete: false,
+      markChainAsComplete: markChainAsComplete,
+    },
+    {
+      index: 1,
+      habits: dummyHabitArr,
+      isComplete: false,
+      markChainAsComplete: markChainAsComplete,
+    },
+    {
+      index: 2,
+      habits: dummyHabitArr,
+      isComplete: false,
+      markChainAsComplete: markChainAsComplete,
+    },
+  ]);
+
   return (
     <View style={styles.container}>
-      {chainList.map((chain) => (
-        <Chain key={chainKeyCount++} {...chain} />
+      {chainList.map((chain, i) => (
+        <Chain key={i++} {...chain} />
       ))}
     </View>
   );

@@ -52,12 +52,10 @@ const Chain = ({
     }
   };
 
-  let habitKeyCount = 0;
-
   return (
     <View style={styles.container}>
-      {habitList.map((habit) => (
-        <Habit key={habitKeyCount++} {...habit} />
+      {habitList.map((habit, i) => (
+        <Habit key={i++} {...habit} />
       ))}
     </View>
   );
