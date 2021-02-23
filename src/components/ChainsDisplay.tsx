@@ -16,21 +16,25 @@ const ChainsDisplay = ({ incCounter, chains }: DisplayChainsType) => {
       text: "1",
       index: 0,
       isComplete: false,
+      tryMarkHabit: undefined,
     },
     {
       text: "2",
       index: 1,
       isComplete: false,
+      tryMarkHabit: undefined,
     },
     {
       text: "3",
       index: 2,
       isComplete: false,
+      tryMarkHabit: undefined,
     },
     {
       text: "4",
       index: 3,
       isComplete: false,
+      tryMarkHabit: undefined,
     },
   ];
 
