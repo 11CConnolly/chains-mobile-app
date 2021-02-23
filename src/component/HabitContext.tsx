@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import { IChain } from "./Chain";
 import { IHabit } from "./Habit";
 
@@ -6,59 +6,96 @@ interface IContextProps {
   chains: IChain[];
   setChains: React.Dispatch<React.SetStateAction<IChain[]>>;
   markHabit: Function;
+  markChain: Function;
 }
 
 export const HabitContext = createContext<IContextProps>({
   chains: [],
   setChains: () => null,
   markHabit: (listIndex: number, habitIndex: number) => null,
+  markChain: (chainIndex: number) => null,
 });
 
 export const HabitProvider = (props: any) => {
-  const dummyHabitArr: IHabit[] = [
-    {
-      text: "1",
-      index: 0,
-      isComplete: false,
-      tryMarkHabit: undefined,
-    },
-    {
-      text: "2",
-      index: 1,
-      isComplete: false,
-      tryMarkHabit: undefined,
-    },
-    {
-      text: "3",
-      index: 2,
-      isComplete: false,
-      tryMarkHabit: undefined,
-    },
-    {
-      text: "4",
-      index: 3,
-      isComplete: false,
-      tryMarkHabit: undefined,
-    },
-  ];
+  const [chains, setChains] = useState<IChain[]>([]);
 
-  const [chains, setChains] = useState<IChain[]>([
-    {
-      index: 0,
-      habits: dummyHabitArr,
-      isComplete: false,
-    },
-    {
-      index: 1,
-      habits: dummyHabitArr,
-      isComplete: false,
-    },
-  ]);
+  // On Mount initialise the values
+  useEffect(() => {
+    setChains([
+      {
+        index: 0,
+        habits: [
+          {
+            text: "1",
+            index: 0,
+            isComplete: false,
+            tryMarkHabit: undefined,
+          },
+          {
+            text: "2",
+            index: 1,
+            isComplete: false,
+            tryMarkHabit: undefined,
+          },
+          {
+            text: "3",
+            index: 2,
+            isComplete: false,
+            tryMarkHabit: undefined,
+          },
+        ],
+        isComplete: false,
+      },
+      {
+        index: 1,
+        habits: [
+          {
+            text: "1",
+            index: 0,
+            isComplete: false,
+            tryMarkHabit: undefined,
+          },
+          {
+            text: "2",
+            index: 1,
+            isComplete: false,
+            tryMarkHabit: undefined,
+          },
+          {
+            text: "3",
+            index: 2,
+            isComplete: false,
+            tryMarkHabit: undefined,
+          },
+        ],
+        isComplete: false,
+      },
+    ]);
+  }, []);
 
-  const markHabit = (listIndex: number, habitIndex: number) => {};
+  const markHabit = (chainIndex: number, habitIndex: number) => {
+    let items = [...chains];
+    let item = { ...items[chainIndex] };
+    item.habits[habitIndex].isComplete = true;
+    items[chainIndex] = item;
+    setChains(items);
+  };
+
+  const markChain = (chainIndex: number) => {
+    setChains((list) =>
+      list.map((chain, i) =>
+        i === chainIndex
+          ? {
+              ...chain,
+              isComplete: true,
+            }
+          : chain
+      )
+    );
+  };
 
   return (
-    <HabitContext.Provider value={{ chains, setChains, markHabit }}>
+    <HabitContext.Provider value={{ chains, setChains, markHabit, markChain }}>
       {props.children}
     </HabitContext.Provider>
   );

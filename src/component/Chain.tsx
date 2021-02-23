@@ -12,20 +12,23 @@ export interface IChain {
 
 const Chain = (props: IChain) => {
   const { index } = props;
-  const { chains, setChains, markHabit } = useContext(HabitContext);
+  const { chains, setChains, markHabit, markChain } = useContext(HabitContext);
 
   const habits = chains[index].habits;
 
-  const tryMarkHabit = (habitIndex: number) => {
+  const tryMarking = (habitIndex: number) => {
     if (habitIndex === 0 || chains[index].habits[habitIndex - 1].isComplete) {
       markHabit(index, habitIndex);
+      if (habitIndex === habits.length - 1) {
+        markChain(index);
+      }
     }
   };
 
   return (
     <View style={styles.chain}>
       {habits.map((habit, i) => (
-        <Habit {...habit} key={i++} tryMarkHabit={tryMarkHabit}></Habit>
+        <Habit {...habit} key={i++} tryMarkHabit={tryMarking}></Habit>
       ))}
     </View>
   );
