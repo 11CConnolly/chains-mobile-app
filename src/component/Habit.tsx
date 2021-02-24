@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import Dialog from "react-native-dialog";
 import styles from "../common/styles";
+import DialogBox, { IDialogBoxProps } from "./DialogBox";
 import { HabitContext } from "./HabitContext";
 import ProgressBar from "./ProgressBar";
 
@@ -24,6 +25,19 @@ const Habit = (props: IHabit) => {
     setHabitText(tempText);
   };
 
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  const dialogBoxProps: IDialogBoxProps = {
+    title: "Edit Habit",
+    placeholderText: habitText,
+    visible: visible,
+    cancelButtonPress: handleCancel,
+    OKButtonPress: handleOK,
+    onChangeFunc: setTempText,
+  };
+
   return (
     <>
       <TouchableOpacity
@@ -36,20 +50,7 @@ const Habit = (props: IHabit) => {
         </Text>
       </TouchableOpacity>
       <ProgressBar inProgress={isComplete}></ProgressBar>
-      {visible && (
-        <View>
-          <Dialog.Container visible={visible} avoidKeyboard={true}>
-            <Dialog.Title>Start Chain with First Habit</Dialog.Title>
-            <Dialog.Input
-              defaultValue={"Enter Habit Name"}
-              autoFocus
-              onChangeText={(input) => setTempText(input)}
-            ></Dialog.Input>
-            <Dialog.Button label="Cancel" onPress={() => setVisible(false)} />
-            <Dialog.Button label="OK" onPress={() => handleOK()} />
-          </Dialog.Container>
-        </View>
-      )}
+      {visible && <DialogBox {...dialogBoxProps} />}
     </>
   );
 };

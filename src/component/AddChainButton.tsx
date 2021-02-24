@@ -3,6 +3,7 @@ import react, { useContext } from "react";
 import { TouchableOpacity, Text, View } from "react-native";
 import Dialog from "react-native-dialog";
 import styles from "../common/styles";
+import DialogBox, { IDialogBoxProps } from "./DialogBox";
 import { HabitContext } from "./HabitContext";
 
 export interface IAddChainButton {}
@@ -22,28 +23,24 @@ const AddChainButton = (props: IAddChainButton) => {
     addChain(text);
   };
 
+  const dialogBoxProps: IDialogBoxProps = {
+    title: "Add First Habit",
+    placeholderText: "Enter Habit",
+    visible: visible,
+    cancelButtonPress: handleCancel,
+    OKButtonPress: handleOK,
+    onChangeFunc: setText,
+  };
+
   return (
     <>
       <TouchableOpacity
         style={[styles.habit, styles.incomplete]}
         onPress={() => setVisible(true)}
       >
-        <Text style={styles.chainText}>+</Text>
+        <Text style={[styles.addText]}>+</Text>
       </TouchableOpacity>
-      {visible && (
-        <View>
-          <Dialog.Container visible={visible} avoidKeyboard={true}>
-            <Dialog.Title>Start Chain with First Habit</Dialog.Title>
-            <Dialog.Input
-              defaultValue={"Enter Habit Name"}
-              autoFocus
-              onChangeText={(input) => setText(input)}
-            ></Dialog.Input>
-            <Dialog.Button label="Cancel" onPress={() => handleCancel()} />
-            <Dialog.Button label="OK" onPress={() => handleOK()} />
-          </Dialog.Container>
-        </View>
-      )}
+      {visible && <DialogBox {...dialogBoxProps} />}
     </>
   );
 };

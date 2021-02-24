@@ -45,7 +45,7 @@ export default StyleSheet.create({
   menuLine: {
     width: 30,
     height: 3,
-    backgroundColor: LIGHT_RED,
+    backgroundColor: BLACK,
     marginLeft: 20,
     marginTop: 5,
   },
@@ -60,7 +60,7 @@ export default StyleSheet.create({
   },
   // Styles for Habits
   habit: {
-    margin: 2,
+    margin: 1,
     height: 100,
     width: 100,
     borderRadius: 50,
@@ -68,7 +68,7 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   incomplete: {
-    backgroundColor: DARK_BLUE,
+    backgroundColor: LIGHT_RED,
   },
   complete: {
     backgroundColor: LIGHT_GREEN,
@@ -79,7 +79,12 @@ export default StyleSheet.create({
     color: OFF_WHITE,
     fontSize: 14,
   },
-  // Styles for Habits
+  addText: {
+    justifyContent: "center",
+    padding: 10,
+    color: OFF_WHITE,
+    fontSize: 30,
+  },
   progressBar: {
     width: 15,
     height: 3,
