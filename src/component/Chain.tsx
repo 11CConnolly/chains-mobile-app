@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import styles from "../common/styles";
 import { HabitContext } from "./HabitContext";
 import Habit, { IHabit } from "./Habit";
+import AddHabitButton from "./AddHabitButton";
 
 export interface IChain {
   habits: IHabit[];
@@ -12,7 +13,7 @@ export interface IChain {
 
 const Chain = (props: IChain) => {
   const { index } = props;
-  const { chains, setChains, markHabit, markChain } = useContext(HabitContext);
+  const { chains, markHabit, markChain } = useContext(HabitContext);
 
   const habits = chains[index].habits;
 
@@ -26,11 +27,14 @@ const Chain = (props: IChain) => {
   };
 
   return (
-    <View style={styles.chain}>
-      {habits.map((habit, i) => (
-        <Habit {...habit} key={i++} tryMarkHabit={tryMarking}></Habit>
-      ))}
-    </View>
+    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      <View style={styles.chain}>
+        {habits.map((habit, i) => (
+          <Habit {...habit} key={i++} tryMarkHabit={tryMarking}></Habit>
+        ))}
+        <AddHabitButton chainIndex={index} />
+      </View>
+    </ScrollView>
   );
 };
 
