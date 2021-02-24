@@ -93,7 +93,7 @@ export const HabitProvider = (props: any) => {
   const markHabit = (chainIndex: number, habitIndex: number) => {
     let items = [...chains];
     let item = { ...items[chainIndex] };
-    item.habits[habitIndex].isComplete = true;
+    item.habits[habitIndex].isComplete = !item.habits[habitIndex].isComplete;
     items[chainIndex] = item;
     setChains(items);
   };

@@ -68,7 +68,7 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   incomplete: {
-    backgroundColor: LIGHT_RED,
+    backgroundColor: DARK_BLUE,
   },
   complete: {
     backgroundColor: LIGHT_GREEN,
