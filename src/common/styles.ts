@@ -4,6 +4,7 @@ export const LIGHT_GREEN = "#2ecc71";
 export const LIGHT_RED = "#e74c3c";
 export const OFF_WHITE = "#ecf0f1";
 export const DARK_BLUE = "#2c3e50";
+export const BLACK = "#000000";
 
 export default StyleSheet.create({
   // Style for MainScreen
@@ -44,7 +45,7 @@ export default StyleSheet.create({
   menuLine: {
     width: 30,
     height: 3,
-    backgroundColor: "#000000",
+    backgroundColor: LIGHT_RED,
     marginLeft: 20,
     marginTop: 5,
   },
@@ -73,6 +74,15 @@ export default StyleSheet.create({
     backgroundColor: LIGHT_GREEN,
   },
   chainText: {
+    justifyContent: "center",
+    padding: 10,
     color: OFF_WHITE,
+    fontSize: 14,
+  },
+  // Styles for Habits
+  progressBar: {
+    width: 15,
+    height: 3,
+    top: 50,
   },
 });

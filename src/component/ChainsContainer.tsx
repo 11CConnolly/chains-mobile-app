@@ -10,7 +10,7 @@ const ChainsContainer = () => {
 
   return (
     <View style={styles.chainsContainer}>
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps={"handled"}>
         {chains.map((chain, i) => (
           <Chain key={i++} {...chain} />
         ))}

@@ -8,7 +8,7 @@ interface IContextProps {
   addHabit: (chainIndex: number, text: string) => void;
   addChain: (text: string) => void;
   markHabit: (chainIndex: number, habitIndex: number) => void;
-  markChain: (chainIndex: number) => null;
+  markChain: (chainIndex: number) => void;
 }
 
 export const HabitContext = createContext<IContextProps>({
@@ -75,7 +75,7 @@ export const HabitProvider = (props: any) => {
       isComplete: false,
       tryMarkHabit: undefined,
     });
-    items[chainIndex] = { ...items[chainIndex], habits };
+    items[chainIndex] = { ...items[chainIndex], habits, isComplete: false };
 
     setChains(items);
   };
