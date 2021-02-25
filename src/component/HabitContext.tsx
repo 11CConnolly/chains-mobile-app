@@ -90,7 +90,7 @@ export const HabitProvider = (props: any) => {
     setChains(items);
   };
 
-  const markHabit = (chainIndex: number, habitIndex: number) => {
+  const toggleHabit = (chainIndex: number, habitIndex: number) => {
     let items = [...chains];
     let item = { ...items[chainIndex] };
     item.habits[habitIndex].isComplete = !item.habits[habitIndex].isComplete;
@@ -98,13 +98,13 @@ export const HabitProvider = (props: any) => {
     setChains(items);
   };
 
-  const markChain = (chainIndex: number) => {
+  const toggleChain = (chainIndex: number) => {
     setChains((list) =>
       list.map((chain, i) =>
         i === chainIndex
           ? {
               ...chain,
-              isComplete: true,
+              isComplete: !chain.isComplete,
             }
           : chain
       )
@@ -113,7 +113,14 @@ export const HabitProvider = (props: any) => {
 
   return (
     <HabitContext.Provider
-      value={{ chains, setChains, addHabit, addChain, markHabit, markChain }}
+      value={{
+        chains,
+        setChains,
+        addHabit,
+        addChain,
+        markHabit: toggleHabit,
+        markChain: toggleChain,
+      }}
     >
       {props.children}
     </HabitContext.Provider>

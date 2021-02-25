@@ -35,7 +35,7 @@ const AddChainButton = (props: IAddChainButton) => {
   return (
     <>
       <TouchableOpacity
-        style={[styles.habit, styles.incomplete]}
+        style={[styles.addButton]}
         onPress={() => setVisible(true)}
       >
         <Text style={[styles.addText]}>+</Text>

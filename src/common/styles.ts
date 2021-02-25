@@ -1,9 +1,10 @@
 import { StyleSheet, StatusBar, Platform } from "react-native";
 
 export const LIGHT_GREEN = "#2ecc71";
-export const LIGHT_RED = "#e74c3c";
-export const OFF_WHITE = "#ecf0f1";
-export const DARK_BLUE = "#2c3e50";
+export const ALIZARIN_RED = "#e74c3c";
+export const CLOUDS_WHITE = "#ecf0f1";
+export const MIDNIGHT_BLUE = "#2c3e50";
+export const PURPLE = "#a15dbd";
 export const BLACK = "#000000";
 
 export default StyleSheet.create({
@@ -11,7 +12,7 @@ export default StyleSheet.create({
   screenContainer: {
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     flex: 1,
-    backgroundColor: OFF_WHITE,
+    backgroundColor: CLOUDS_WHITE,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -30,16 +31,15 @@ export default StyleSheet.create({
     width: "100%",
     display: "flex",
     height: 80,
-    backgroundColor: LIGHT_RED,
+    backgroundColor: MIDNIGHT_BLUE,
     marginBottom: 10,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
   chainCount: {
-    color: OFF_WHITE,
+    color: CLOUDS_WHITE,
     fontSize: 32,
-    marginBottom: 10,
   },
   // Style for Burger Menu
   menuLine: {
@@ -52,7 +52,7 @@ export default StyleSheet.create({
   // Style for Chains
   chain: {
     display: "flex",
-    height: 100,
+    height: 110,
     paddingTop: 5,
     marginBottom: 10,
     flexDirection: "row",
@@ -60,15 +60,15 @@ export default StyleSheet.create({
   },
   // Styles for Habits
   habit: {
-    margin: 1,
-    height: 100,
-    width: 100,
-    borderRadius: 50,
+    margin: 2,
+    height: 110,
+    width: 110,
+    borderRadius: 55,
     alignItems: "center",
     justifyContent: "center",
   },
   incomplete: {
-    backgroundColor: DARK_BLUE,
+    backgroundColor: MIDNIGHT_BLUE,
   },
   complete: {
     backgroundColor: LIGHT_GREEN,
@@ -76,18 +76,29 @@ export default StyleSheet.create({
   chainText: {
     justifyContent: "center",
     padding: 10,
-    color: OFF_WHITE,
-    fontSize: 14,
+    color: CLOUDS_WHITE,
+    fontSize: 16,
+  },
+  // Styles for Add Buttons
+  addButton: {
+    margin: 2,
+    height: 110,
+    width: 110,
+    borderRadius: 55,
+    borderColor: MIDNIGHT_BLUE,
+    borderWidth: 5,
+    alignItems: "center",
+    justifyContent: "center",
   },
   addText: {
     justifyContent: "center",
     padding: 10,
-    color: OFF_WHITE,
+    color: MIDNIGHT_BLUE,
     fontSize: 30,
   },
   progressBar: {
     width: 15,
     height: 3,
-    top: 50,
+    top: 55,
   },
 });
