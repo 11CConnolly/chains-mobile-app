@@ -53,8 +53,8 @@ export default StyleSheet.create({
   chain: {
     display: "flex",
     height: 110,
-    paddingTop: 5,
-    marginBottom: 10,
+    paddingTop: 10,
+    marginBottom: 20,
     flexDirection: "row",
     flexWrap: "nowrap",
   },

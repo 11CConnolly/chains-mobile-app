@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 import Dialog from "react-native-dialog";
-import styles, { LIGHT_RED } from "../common/styles";
+import styles, { ALIZARIN_RED } from "../common/styles";
 
 export interface IDialogBoxProps {
   title: string;
