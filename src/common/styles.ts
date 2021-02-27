@@ -30,7 +30,7 @@ export default StyleSheet.create({
   topBar: {
     width: "100%",
     display: "flex",
-    height: 80,
+    height: 70,
     backgroundColor: MIDNIGHT_BLUE,
     marginBottom: 10,
     flexDirection: "row",

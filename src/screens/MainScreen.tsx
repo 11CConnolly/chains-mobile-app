@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  SafeAreaView,
-  StatusBar,
-  Platform,
-  ScrollView,
-} from "react-native";
-import ChainsContainer from "../component/ChainsContainer";
-import TopBar from "../component/TopBar";
+import { SafeAreaView } from "react-native";
+import ChainsContainer from "../components/ChainsContainer";
+import TopBar from "../components/topBar/TopBar";
 import styles from "../common/styles";
-import { HabitProvider } from "../component/HabitContext";
+import { HabitProvider } from "../state/HabitContext";
 
 const MainScreen = () => {
   return (
