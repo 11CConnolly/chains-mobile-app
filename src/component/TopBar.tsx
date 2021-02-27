@@ -15,7 +15,11 @@ const TopBar = (props: any) => {
   return (
     <View style={styles.topBar}>
       <BurgerMenu />
-      <Text style={styles.chainCount}>{completeChains}</Text>
+      <Text style={styles.chainCount}>
+        {completeChains}
+        <Text style={{ ...styles.chainCount, fontSize: 24 }}> out of </Text>
+        {chains.length}
+      </Text>
       <BurgerMenu />
     </View>
   );
