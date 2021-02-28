@@ -17,9 +17,13 @@ export interface IHabit {
 const Habit = (props: IHabit) => {
   let { text, index, isComplete, tryMarkHabit, deleteHabit } = props;
 
-  const [tempText, setTempText] = useState("");
   const [habitText, setHabitText] = useState(text);
+  const [tempText, setTempText] = useState("");
   const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setHabitText(text);
+  }, [text]);
 
   const handleOK = () => {
     setVisible(false);
@@ -42,8 +46,8 @@ const Habit = (props: IHabit) => {
     cancelButtonPress: handleCancel,
     OKButtonPress: handleOK,
     onChangeFunc: setTempText,
-    showDelete: true,
     deleteButtonPress: handleDelete,
+    showDelete: true,
   };
 
   return (

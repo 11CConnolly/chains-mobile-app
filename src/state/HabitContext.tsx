@@ -87,7 +87,6 @@ export const HabitProvider = (props: any) => {
 
     let habits = items[chainIndex].habits;
 
-    // Remove habit from the list
     habits.splice(habitIndex, 1);
 
     // Check chain if there are any habits left

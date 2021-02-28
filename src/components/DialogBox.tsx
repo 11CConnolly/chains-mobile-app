@@ -1,7 +1,8 @@
-import React from "react";
-import { Text, View } from "react-native";
+import React, { useState } from "react";
+import { View } from "react-native";
 import Dialog from "react-native-dialog";
-import styles, { ALIZARIN_RED } from "../common/styles";
+import { ALIZARIN_RED } from "../common/styles";
+import DeleteDialogBox, { IDeleteDialogBoxProps } from "./DeleteDialogBox";
 
 export interface IDialogBoxProps {
   title: string;
@@ -26,6 +27,20 @@ const DialogBox = (props: IDialogBoxProps) => {
     deleteButtonPress,
   } = props;
 
+  const [deleteDialogVisible, setDeleteDialogVisible] = useState(false);
+
+  const handleDelete = () => {
+    setDeleteDialogVisible(false);
+    deleteButtonPress!();
+  };
+
+  const deleteDialogProps: IDeleteDialogBoxProps = {
+    title: "Are you sure you want to delete this Habit?",
+    visible: deleteDialogVisible,
+    noButtonPress: cancelButtonPress,
+    yesButtonPress: handleDelete,
+  };
+
   return (
     <View>
       <Dialog.Container visible={visible}>
@@ -38,12 +53,13 @@ const DialogBox = (props: IDialogBoxProps) => {
           <Dialog.Button
             label="Delete"
             style={{ color: ALIZARIN_RED }}
-            onPress={() => deleteButtonPress!()}
+            onPress={() => setDeleteDialogVisible(true)}
           />
         )}
         <Dialog.Button label="Cancel" onPress={() => cancelButtonPress()} />
         <Dialog.Button label="OK" onPress={() => OKButtonPress()} />
       </Dialog.Container>
+      {deleteDialogVisible && <DeleteDialogBox {...deleteDialogProps} />}
     </View>
   );
 };
