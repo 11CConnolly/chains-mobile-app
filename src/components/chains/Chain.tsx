@@ -13,18 +13,13 @@ export interface IChain {
 
 const Chain = (props: IChain) => {
   const { index } = props;
-  const { chains, markHabit, markChain, removeHabit } = useContext(
-    HabitContext
-  );
+  const { chains, markHabit, removeHabit } = useContext(HabitContext);
 
   const habits = chains[index].habits;
 
   const tryMarking = (habitIndex: number) => {
     if (habitIndex === 0 || chains[index].habits[habitIndex - 1].isComplete) {
       markHabit(index, habitIndex);
-      if (habitIndex === habits.length - 1) {
-        markChain(index);
-      }
     }
   };
 

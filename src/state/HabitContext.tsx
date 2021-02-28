@@ -75,26 +75,23 @@ export const HabitProvider = (props: any) => {
       text,
       index: habits.length,
       isComplete: false,
-      tryMarkHabit: undefined,
     });
     items[chainIndex] = { ...items[chainIndex], habits, isComplete: false };
 
-    setChains(items);
+    updateChains(items);
   };
 
   const removeHabit = (chainIndex: number, habitIndex: number) => {
     let items = [...chains];
-
     let habits = items[chainIndex].habits;
 
     habits.splice(habitIndex, 1);
 
-    // Check chain if there are any habits left
     if (habits.length === 0) {
       items.splice(chainIndex, 1);
     }
 
-    setChains(items);
+    updateChains(items);
   };
 
   const addChain = (text: string) => {
@@ -104,7 +101,7 @@ export const HabitProvider = (props: any) => {
       habits: [{ index: 0, text, isComplete: false, tryMarkHabit: undefined }],
       isComplete: false,
     });
-    setChains(items);
+    updateChains(items);
   };
 
   const toggleHabit = (chainIndex: number, habitIndex: number) => {
@@ -112,7 +109,20 @@ export const HabitProvider = (props: any) => {
     let item = { ...items[chainIndex] };
     item.habits[habitIndex].isComplete = !item.habits[habitIndex].isComplete;
     items[chainIndex] = item;
-    setChains(items);
+    updateChains(items);
+  };
+
+  // Ensures chains are updates with accurate isComplete
+  const updateChains = (newChains: IChain[]) => {
+    setChains(
+      newChains.map((chain) => {
+        const isComplete = chain.habits.reduce(
+          (sum, habit) => sum && habit.isComplete,
+          true
+        );
+        return { ...chain, isComplete };
+      })
+    );
   };
 
   const toggleChain = (chainIndex: number) => {

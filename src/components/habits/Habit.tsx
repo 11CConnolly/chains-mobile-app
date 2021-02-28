@@ -15,7 +15,7 @@ export interface IHabit {
 }
 
 const Habit = (props: IHabit) => {
-  let { text, index, isComplete, tryMarkHabit, deleteHabit } = props;
+  let { text, index, isComplete = false, tryMarkHabit, deleteHabit } = props;
 
   const [habitText, setHabitText] = useState(text);
   const [tempText, setTempText] = useState("");
