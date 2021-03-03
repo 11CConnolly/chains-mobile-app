@@ -1,3 +1,5 @@
+import { Kalam_400Regular } from "@expo-google-fonts/kalam";
+import { useFonts } from "expo-font";
 import { StyleSheet, StatusBar, Platform } from "react-native";
 
 export const LIGHT_GREEN = "#2ecc71";
@@ -6,6 +8,12 @@ export const CLOUDS_WHITE = "#ecf0f1";
 export const MIDNIGHT_BLUE = "#2c3e50";
 export const PURPLE = "#a15dbd";
 export const BLACK = "#000000";
+
+const style = () => {
+  let [fontsLoaded] = useFonts({
+    Kalam_400Regular: require("../../assets/fonts/Kalam-Light.ttf"),
+  });
+};
 
 export default StyleSheet.create({
   // Style for MainScreen
@@ -40,6 +48,7 @@ export default StyleSheet.create({
   chainCount: {
     color: CLOUDS_WHITE,
     fontSize: 32,
+    fontFamily: "Kalam_400Regular",
   },
   // Style for Burger Menu
   menuLine: {
