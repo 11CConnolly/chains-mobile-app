@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
-import Dialog from "react-native-dialog";
+import React, { useState, useEffect, useRef } from "react";
+import { Animated, Text, TouchableOpacity } from "react-native";
+import * as Animatable from "react-native-animatable";
 import styles from "../../common/styles";
 import DialogBox, { IDialogBoxProps } from "../DialogBox";
-import { HabitContext } from "../../state/HabitContext";
 import ProgressBar from "./ProgressBar";
 
 export interface IHabit {
@@ -50,17 +49,29 @@ const Habit = (props: IHabit) => {
     showDelete: true,
   };
 
+  const AnimatedTouchable = Animatable.createAnimatableComponent(
+    TouchableOpacity
+  );
+
+  const handlePress = () => {
+    if (tryMarkHabit!(index) && ref) {
+      console.log("Pulse");
+    }
+  };
+
+  const ref = useRef<typeof AnimatedTouchable & TouchableOpacity>(null);
+
   return (
     <>
-      <TouchableOpacity
+      <AnimatedTouchable
         style={[styles.habit, isComplete ? styles.complete : styles.incomplete]}
-        onPress={() => tryMarkHabit!(index)}
+        onPress={() => handlePress()}
         onLongPress={() => setVisible(true)}
       >
         <Text style={styles.chainText} numberOfLines={3} ellipsizeMode={"tail"}>
           {habitText}
         </Text>
-      </TouchableOpacity>
+      </AnimatedTouchable>
       <ProgressBar inProgress={isComplete}></ProgressBar>
       {visible && <DialogBox {...dialogBoxProps} />}
     </>
