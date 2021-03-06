@@ -1,15 +1,20 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { View, Text } from "react-native";
-import BurgerMenu from "./BurgerMenu";
-import styles from "../../common/styles";
+import styles, { CLOUDS_WHITE, LIGHT_GREEN } from "../../common/styles";
 import { HabitContext } from "../../state/HabitContext";
-import CustomText from "../../common/CustomText";
-import { createAnimatableComponent } from "react-native-animatable";
+import { useFonts, Kalam_300Light } from "@expo-google-fonts/kalam";
+import * as Animatable from "react-native-animatable";
+import { sleep } from "../../utils/utils";
 
 const TopBar = (props: any) => {
   const { chains } = useContext(HabitContext);
 
   const [finishedChains, setFinishedChains] = useState(0);
+  const [done, setDone] = useState(false);
+
+  const animateChangeRef = useRef(null);
+  const animateTextRef = useRef(null);
+  const animateDoneRef = useRef(null);
 
   useEffect(() => {
     finishedChains !== completeChains && handleChange(completeChains);
@@ -21,27 +26,73 @@ const TopBar = (props: any) => {
   );
 
   const handleChange = (completeChains: number) => {
+    // Change new finished habits
     setFinishedChains(completeChains);
+
+    // Handle animations
+    if (completeChains === chains.length) {
+      animateChangeRef.current?.bounce(1600);
+      setDone(true);
+      sleep(25)
+        .then(() => {
+          animateTextRef.current?.bounce(1600);
+        })
+        .then(() => {
+          sleep(25).then(() => {
+            animateDoneRef.current?.bounce(1600);
+          });
+        });
+    } else if (animateChangeRef) {
+      setDone(false);
+      animateChangeRef.current?.bounce(1200);
+    }
   };
 
-  const finishedRef = useRef(null);
+  let [fontsLoaded] = useFonts({
+    Kalam_300Light,
+  });
 
-  const AnimatedCustomText = createAnimatableComponent(CustomText);
+  if (!fontsLoaded) return <></>;
 
   return (
     <View style={styles.topBar}>
-      <BurgerMenu />
-      <CustomText style={styles.chainCount}>
-        <AnimatedCustomText style={styles.chainCount} ref={finishedRef}>
+      <Animatable.View ref={animateChangeRef}>
+        <Text
+          style={{
+            ...styles.chainCount,
+            fontFamily: "Kalam_300Light",
+            color: done ? LIGHT_GREEN : CLOUDS_WHITE,
+          }}
+        >
           {finishedChains}
-        </AnimatedCustomText>
-        <CustomText style={{ ...styles.chainCount, fontSize: 24 }}>
+        </Text>
+      </Animatable.View>
+
+      <Animatable.View ref={animateTextRef}>
+        <Text
+          style={{
+            ...styles.chainCount,
+            fontSize: 24,
+            fontFamily: "Kalam_300Light",
+            color: done ? LIGHT_GREEN : CLOUDS_WHITE,
+          }}
+        >
           {" "}
           out of{" "}
-        </CustomText>
-        {chains.length}
-      </CustomText>
-      <BurgerMenu />
+        </Text>
+      </Animatable.View>
+
+      <Animatable.View ref={animateDoneRef}>
+        <Text
+          style={{
+            ...styles.chainCount,
+            fontFamily: "Kalam_300Light",
+            color: done ? LIGHT_GREEN : CLOUDS_WHITE,
+          }}
+        >
+          {chains.length}
+        </Text>
+      </Animatable.View>
     </View>
   );
 };

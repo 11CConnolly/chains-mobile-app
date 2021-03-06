@@ -33,7 +33,7 @@ export default StyleSheet.create({
     height: 70,
     backgroundColor: MIDNIGHT_BLUE,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
   },
   chainCount: {
