@@ -32,7 +32,6 @@ export default StyleSheet.create({
     display: "flex",
     height: 70,
     backgroundColor: MIDNIGHT_BLUE,
-    marginBottom: 10,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -40,6 +39,7 @@ export default StyleSheet.create({
   chainCount: {
     color: CLOUDS_WHITE,
     fontSize: 32,
+    paddingTop: 10,
   },
   // Style for Burger Menu
   menuLine: {

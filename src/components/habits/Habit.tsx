@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Animated, Text, TouchableOpacity } from "react-native";
+import {
+  Animated,
+  TouchableHighlight,
+  TouchableNativeFeedback,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from "react-native";
 import * as Animatable from "react-native-animatable";
+import CustomText from "../../common/CustomText";
 import styles from "../../common/styles";
 import DialogBox, { IDialogBoxProps } from "../DialogBox";
 import ProgressBar from "./ProgressBar";
@@ -49,29 +56,34 @@ const Habit = (props: IHabit) => {
     showDelete: true,
   };
 
-  const AnimatedTouchable = Animatable.createAnimatableComponent(
-    TouchableOpacity
-  );
+  const AnimationRef = useRef(null);
 
   const handlePress = () => {
-    if (tryMarkHabit!(index) && ref) {
-      console.log("Pulse");
+    if (tryMarkHabit!(index) && AnimationRef) {
+      AnimationRef.current?.pulse(500);
     }
   };
 
-  const ref = useRef<typeof AnimatedTouchable & TouchableOpacity>(null);
-
   return (
     <>
-      <AnimatedTouchable
-        style={[styles.habit, isComplete ? styles.complete : styles.incomplete]}
-        onPress={() => handlePress()}
-        onLongPress={() => setVisible(true)}
-      >
-        <Text style={styles.chainText} numberOfLines={3} ellipsizeMode={"tail"}>
-          {habitText}
-        </Text>
-      </AnimatedTouchable>
+      <Animatable.View ref={AnimationRef}>
+        <TouchableOpacity
+          style={[
+            styles.habit,
+            isComplete ? styles.complete : styles.incomplete,
+          ]}
+          onPress={() => handlePress()}
+          onLongPress={() => setVisible(true)}
+        >
+          <CustomText
+            style={styles.chainText}
+            numberOfLines={3}
+            ellipsizeMode={"tail"}
+          >
+            {habitText}
+          </CustomText>
+        </TouchableOpacity>
+      </Animatable.View>
       <ProgressBar inProgress={isComplete}></ProgressBar>
       {visible && <DialogBox {...dialogBoxProps} />}
     </>
