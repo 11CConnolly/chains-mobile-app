@@ -20,10 +20,10 @@ const Chain = (props: IChain) => {
   const habits = chains[index].habits;
 
   const tryMarking = (habitIndex: number) => {
-    const markedTrue = chains[index].habits[habitIndex].isComplete;
     if (habitIndex === 0 || chains[index].habits[habitIndex - 1].isComplete) {
+      const mark = chains[index].habits[habitIndex].isComplete;
       markHabit(index, habitIndex);
-      return !markedTrue;
+      return !mark;
     }
   };
 

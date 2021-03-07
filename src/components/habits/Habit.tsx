@@ -11,6 +11,7 @@ import CustomText from "../CustomText";
 import styles from "../../common/styles";
 import DialogBox, { IDialogBoxProps } from "../DialogBox";
 import ProgressBar from "./ProgressBar";
+import Toast, { BaseToastProps } from "react-native-toast-message";
 
 export interface IHabit {
   index: number;
@@ -61,6 +62,13 @@ const Habit = (props: IHabit) => {
   const handlePress = () => {
     if (tryMarkHabit!(index) && AnimationRef) {
       AnimationRef.current?.pulse(500);
+    } else {
+      Toast.show({
+        type: "error",
+        position: "bottom",
+        text1: "Chains must be completed in order!",
+        text2: "Please complete the previous habit before this one",
+      });
     }
   };
 
@@ -76,8 +84,9 @@ const Habit = (props: IHabit) => {
           onLongPress={() => setVisible(true)}
         >
           <CustomText
+            sansSerif
             maxFontSizeMultiplier={0}
-            style={styles.chainText}
+            style={styles.habitText}
             numberOfLines={3}
             ellipsizeMode={"tail"}
           >

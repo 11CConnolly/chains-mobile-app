@@ -85,7 +85,8 @@ export default StyleSheet.create({
   complete: {
     backgroundColor: LIGHT_GREEN,
   },
-  chainText: {
+  habitText: {
+    textAlign: "center",
     justifyContent: "center",
     padding: 10,
     color: CLOUDS_WHITE,
