@@ -22,12 +22,13 @@ const NewChainDialogBox = (props: INewChainDialogBox) => {
   return (
     <View>
       <Dialog.Container visible={visible}>
-        <Dialog.Title>Add a Title for your chain</Dialog.Title>
+        <Dialog.Title>Add a Title for your Chain</Dialog.Title>
         <Dialog.Input
+          maxLength={24}
           placeholder={"Title"}
           onChangeText={(input) => onChangeTitle(input)}
         ></Dialog.Input>
-        <Dialog.Title>Add your first Habit</Dialog.Title>
+        <Dialog.Description>Add your first Habit</Dialog.Description>
         <Dialog.Input
           placeholder={"Habit"}
           onChangeText={(input) => onChangeHabit(input)}

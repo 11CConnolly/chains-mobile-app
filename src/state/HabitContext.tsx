@@ -29,23 +29,23 @@ export const HabitProvider = (props: any) => {
   useEffect(() => {
     setChains([
       {
-        title: "First Title",
+        title: "Morning",
         index: 0,
         habits: [
           {
-            text: "1",
+            text: "Shower",
             index: 0,
             isComplete: false,
             tryMarkHabit: undefined,
           },
           {
-            text: "2",
+            text: "Make bed",
             index: 1,
             isComplete: false,
             tryMarkHabit: undefined,
           },
           {
-            text: "3",
+            text: "Meditate",
             index: 2,
             isComplete: false,
             tryMarkHabit: undefined,
@@ -54,12 +54,18 @@ export const HabitProvider = (props: any) => {
         isComplete: false,
       },
       {
-        title: "Second Title",
+        title: "Evening Routine",
         index: 1,
         habits: [
           {
-            text: "1",
+            text: "Journal",
             index: 0,
+            isComplete: false,
+            tryMarkHabit: undefined,
+          },
+          {
+            text: "Read 20 minutes",
+            index: 1,
             isComplete: false,
             tryMarkHabit: undefined,
           },
@@ -67,29 +73,29 @@ export const HabitProvider = (props: any) => {
         isComplete: false,
       },
       {
-        title: "Third Title",
-        index: 0,
+        title: "Exercise",
+        index: 2,
         habits: [
           {
-            text: "1",
+            text: "Dynamic Stretch",
             index: 0,
             isComplete: false,
             tryMarkHabit: undefined,
           },
           {
-            text: "2",
+            text: "Run",
             index: 1,
             isComplete: false,
             tryMarkHabit: undefined,
           },
           {
-            text: "3",
+            text: "Mid body",
             index: 2,
             isComplete: false,
             tryMarkHabit: undefined,
           },
           {
-            text: "4",
+            text: "Static stretch",
             index: 3,
             isComplete: false,
             tryMarkHabit: undefined,

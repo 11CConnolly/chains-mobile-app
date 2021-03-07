@@ -7,6 +7,8 @@ export const MIDNIGHT_BLUE = "#2c3e50";
 export const PURPLE = "#a15dbd";
 export const BLACK = "#000000";
 
+const CHAIN_SIZE = 90;
+
 export default StyleSheet.create({
   // Style for MainScreen
   screenContainer: {
@@ -51,6 +53,7 @@ export default StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: BLACK,
     borderRadius: 3,
+    maxHeight: 34,
   },
   chainTitle: {
     alignSelf: "flex-start",
@@ -61,7 +64,7 @@ export default StyleSheet.create({
     borderRadius: 3,
   },
   chain: {
-    height: 110,
+    height: CHAIN_SIZE,
     marginTop: 5,
     marginBottom: 15,
     flexDirection: "row",
@@ -70,9 +73,9 @@ export default StyleSheet.create({
   // Styles for Habits
   habit: {
     margin: 2,
-    height: 110,
-    width: 110,
-    borderRadius: 55,
+    height: CHAIN_SIZE,
+    width: CHAIN_SIZE,
+    borderRadius: CHAIN_SIZE / 2,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -91,9 +94,9 @@ export default StyleSheet.create({
   // Styles for Add Buttons
   addButton: {
     margin: 2,
-    height: 110,
-    width: 110,
-    borderRadius: 55,
+    height: CHAIN_SIZE,
+    width: CHAIN_SIZE,
+    borderRadius: CHAIN_SIZE / 2,
     borderColor: MIDNIGHT_BLUE,
     borderWidth: 5,
     alignItems: "center",
@@ -108,6 +111,6 @@ export default StyleSheet.create({
   progressBar: {
     width: 15,
     height: 3,
-    top: 55,
+    top: CHAIN_SIZE / 2,
   },
 });

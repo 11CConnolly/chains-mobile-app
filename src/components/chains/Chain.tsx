@@ -35,6 +35,7 @@ const Chain = (props: IChain) => {
     <View style={styles.chainWrapper}>
       <View style={styles.chainTitleWrapper}>
         <CustomText
+          heavy
           style={styles.chainTitle}
           onLongPress={() => console.log("Edit title")}
         >

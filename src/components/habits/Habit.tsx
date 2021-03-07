@@ -66,7 +66,7 @@ const Habit = (props: IHabit) => {
 
   return (
     <>
-      <Animatable.View ref={AnimationRef}>
+      <Animatable.View ref={AnimationRef} animation="zoomIn">
         <TouchableOpacity
           style={[
             styles.habit,
@@ -76,6 +76,7 @@ const Habit = (props: IHabit) => {
           onLongPress={() => setVisible(true)}
         >
           <CustomText
+            maxFontSizeMultiplier={0}
             style={styles.chainText}
             numberOfLines={3}
             ellipsizeMode={"tail"}
