@@ -44,7 +44,7 @@ const TopBar = (props: any) => {
         });
     } else if (animateChangeRef) {
       setDone(false);
-      animateChangeRef.current?.bounce(1200);
+      animateChangeRef.current?.bounce(800);
     }
   };
 

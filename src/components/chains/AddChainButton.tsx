@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import react, { useContext } from "react";
 import { TouchableOpacity, Text, View } from "react-native";
 import styles from "../../common/styles";
-import DialogBox, { IDialogBoxProps } from "../DialogBox";
 import { HabitContext } from "../../state/HabitContext";
-import CustomText from "../../common/CustomText";
+import CustomText from "../CustomText";
+import NewChainDialogBox, { INewChainDialogBox } from "../NewChainDialogBox";
 
 export interface IAddChainButton {}
 
 const AddChainButton = (props: IAddChainButton) => {
   const { addChain } = useContext(HabitContext);
 
+  const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [visible, setVisible] = useState(false);
 
@@ -20,16 +21,15 @@ const AddChainButton = (props: IAddChainButton) => {
 
   const handleOK = () => {
     setVisible(false);
-    addChain(text);
+    addChain(title, text);
   };
 
-  const dialogBoxProps: IDialogBoxProps = {
-    title: "Add First Habit to New Chain",
-    placeholderText: "Enter Habit",
+  const dialogBoxProps: INewChainDialogBox = {
     visible: visible,
     cancelButtonPress: handleCancel,
     OKButtonPress: handleOK,
-    onChangeFunc: setText,
+    onChangeHabit: setText,
+    onChangeTitle: setTitle,
   };
 
   return (
@@ -40,7 +40,7 @@ const AddChainButton = (props: IAddChainButton) => {
       >
         <CustomText style={styles.addText}>+</CustomText>
       </TouchableOpacity>
-      {visible && <DialogBox {...dialogBoxProps} />}
+      {visible && <NewChainDialogBox {...dialogBoxProps} />}
     </>
   );
 };

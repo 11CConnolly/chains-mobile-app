@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, View } from "react-native";
 import styles from "../../common/styles";
 import DialogBox, { IDialogBoxProps } from "../DialogBox";
 import { HabitContext } from "../../state/HabitContext";
-import CustomText from "../../common/CustomText";
+import CustomText from "../CustomText";
 
 export interface IAddHabitButton {
   chainIndex: number;

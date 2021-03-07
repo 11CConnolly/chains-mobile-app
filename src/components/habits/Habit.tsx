@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
-import CustomText from "../../common/CustomText";
+import CustomText from "../CustomText";
 import styles from "../../common/styles";
 import DialogBox, { IDialogBoxProps } from "../DialogBox";
 import ProgressBar from "./ProgressBar";

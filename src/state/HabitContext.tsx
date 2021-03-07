@@ -7,7 +7,7 @@ interface IContextProps {
   setChains: React.Dispatch<React.SetStateAction<IChain[]>>;
   addHabit: (chainIndex: number, text: string) => void;
   removeHabit: (chainIndex: number, habitIndex: number) => void;
-  addChain: (text: string) => void;
+  addChain: (title: string, habit: string) => void;
   markHabit: (chainIndex: number, habitIndex: number) => void;
   markChain: (chainIndex: number) => void;
 }
@@ -29,6 +29,7 @@ export const HabitProvider = (props: any) => {
   useEffect(() => {
     setChains([
       {
+        title: "First Title",
         index: 0,
         habits: [
           {
@@ -53,11 +54,43 @@ export const HabitProvider = (props: any) => {
         isComplete: false,
       },
       {
+        title: "Second Title",
         index: 1,
         habits: [
           {
             text: "1",
             index: 0,
+            isComplete: false,
+            tryMarkHabit: undefined,
+          },
+        ],
+        isComplete: false,
+      },
+      {
+        title: "Third Title",
+        index: 0,
+        habits: [
+          {
+            text: "1",
+            index: 0,
+            isComplete: false,
+            tryMarkHabit: undefined,
+          },
+          {
+            text: "2",
+            index: 1,
+            isComplete: false,
+            tryMarkHabit: undefined,
+          },
+          {
+            text: "3",
+            index: 2,
+            isComplete: false,
+            tryMarkHabit: undefined,
+          },
+          {
+            text: "4",
+            index: 3,
             isComplete: false,
             tryMarkHabit: undefined,
           },
@@ -94,9 +127,10 @@ export const HabitProvider = (props: any) => {
     updateChains(items);
   };
 
-  const addChain = (text: string) => {
+  const addChain = (title: string, text: string) => {
     let items = [...chains];
     items.splice(chains.length, 0, {
+      title,
       index: chains.length,
       habits: [{ index: 0, text, isComplete: false, tryMarkHabit: undefined }],
       isComplete: false,

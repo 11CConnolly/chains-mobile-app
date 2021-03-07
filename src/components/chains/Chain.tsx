@@ -4,15 +4,17 @@ import styles from "../../common/styles";
 import { HabitContext } from "../../state/HabitContext";
 import Habit, { IHabit } from "../habits/Habit";
 import AddHabitButton from "../habits/AddHabitButton";
+import CustomText from "../CustomText";
 
 export interface IChain {
+  title: string;
   habits: IHabit[];
   index: number;
   isComplete: boolean;
 }
 
 const Chain = (props: IChain) => {
-  const { index } = props;
+  const { index, title } = props;
   const { chains, markHabit, removeHabit } = useContext(HabitContext);
 
   const habits = chains[index].habits;
@@ -30,24 +32,34 @@ const Chain = (props: IChain) => {
   };
 
   return (
-    <ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      keyboardShouldPersistTaps={"always"}
-    >
-      <View style={styles.chain}>
-        {habits.map((habit, i) => (
-          <Habit
-            {...habit}
-            index={i}
-            key={i++}
-            tryMarkHabit={tryMarking}
-            deleteHabit={deleteHabit}
-          ></Habit>
-        ))}
-        <AddHabitButton chainIndex={index} />
+    <View style={styles.chainWrapper}>
+      <View style={styles.chainTitleWrapper}>
+        <CustomText
+          style={styles.chainTitle}
+          onLongPress={() => console.log("Edit title")}
+        >
+          {title}
+        </CustomText>
       </View>
-    </ScrollView>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        keyboardShouldPersistTaps={"always"}
+      >
+        <View style={styles.chain}>
+          {habits.map((habit, i) => (
+            <Habit
+              {...habit}
+              index={i}
+              key={i++}
+              tryMarkHabit={tryMarking}
+              deleteHabit={deleteHabit}
+            ></Habit>
+          ))}
+          <AddHabitButton chainIndex={index} />
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 

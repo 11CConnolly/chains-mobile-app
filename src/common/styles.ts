@@ -19,6 +19,7 @@ export default StyleSheet.create({
   // Style for Container
   chainsContainer: {
     flex: 1,
+    padding: 2,
     alignSelf: "flex-start",
     flexDirection: "column",
     flexWrap: "nowrap",
@@ -41,20 +42,28 @@ export default StyleSheet.create({
     fontSize: 32,
     paddingTop: 10,
   },
-  // Style for Burger Menu
-  menuLine: {
-    width: 30,
-    height: 3,
-    backgroundColor: BLACK,
-    marginLeft: 20,
-    marginTop: 5,
-  },
   // Style for Chains
+  chainWrapper: {
+    paddingTop: 2,
+    flex: 1,
+  },
+  chainTitleWrapper: {
+    borderBottomWidth: 2,
+    borderBottomColor: BLACK,
+    borderRadius: 3,
+  },
+  chainTitle: {
+    alignSelf: "flex-start",
+    color: BLACK,
+    fontSize: 24,
+    borderTopWidth: 2,
+    borderTopColor: BLACK,
+    borderRadius: 3,
+  },
   chain: {
-    display: "flex",
     height: 110,
-    paddingTop: 10,
-    marginBottom: 20,
+    marginTop: 5,
+    marginBottom: 15,
     flexDirection: "row",
     flexWrap: "nowrap",
   },
