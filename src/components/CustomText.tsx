@@ -30,7 +30,7 @@ const CustomText = (props: ICustomText) => {
       style={{
         ...props.style,
         fontFamily: props.sansSerif
-          ? "BalsamiqSans_400Regular"
+          ? "sans-serif"
           : props.heavy
           ? "Kalam_400Regular"
           : "Kalam_300Light",
