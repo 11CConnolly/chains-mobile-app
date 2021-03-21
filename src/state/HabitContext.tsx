@@ -1,6 +1,5 @@
 import React, { useState, createContext, useEffect } from "react";
 import { IChain } from "../components/chains/Chain";
-import { IHabit } from "../components/habits/Habit";
 
 interface IContextProps {
   chains: IChain[];
@@ -10,6 +9,7 @@ interface IContextProps {
   addChain: (title: string, habit: string) => void;
   markHabit: (chainIndex: number, habitIndex: number) => void;
   markChain: (chainIndex: number) => void;
+  clearCompleted: () => void;
 }
 
 export const HabitContext = createContext<IContextProps>({
@@ -20,12 +20,13 @@ export const HabitContext = createContext<IContextProps>({
   addChain: (text: string) => null,
   markHabit: (chainIndex: number, habitIndex: number) => null,
   markChain: (chainIndex: number) => null,
+  clearCompleted: () => null,
 });
 
 export const HabitProvider = (props: any) => {
   const [chains, setChains] = useState<IChain[]>([]);
 
-  // On Mount initialise the values
+  // TODO Dummy values added on Mount to initialise the values to be taken away
   useEffect(() => {
     setChains([
       {
@@ -178,6 +179,17 @@ export const HabitProvider = (props: any) => {
     );
   };
 
+  const clearCompleted = () => {
+    let tempChains = [...chains];
+    tempChains.forEach((chain) => {
+      chain.habits.forEach((habit) => {
+        habit.isComplete = false;
+      });
+      chain.isComplete = false;
+    });
+    setChains(tempChains);
+  };
+
   return (
     <HabitContext.Provider
       value={{
@@ -188,6 +200,7 @@ export const HabitProvider = (props: any) => {
         addChain,
         markHabit: toggleHabit,
         markChain: toggleChain,
+        clearCompleted,
       }}
     >
       {props.children}
