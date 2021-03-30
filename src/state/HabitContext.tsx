@@ -26,6 +26,7 @@ export const HabitContext = createContext<IContextProps>({
 export const HabitProvider = (props: any) => {
   const [chains, setChains] = useState<IChain[]>([]);
 
+  // TODO Dummy values added on Mount to initialise the values to be taken away
   useEffect(() => {
     setChains([
       {
