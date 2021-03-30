@@ -6,22 +6,7 @@ import Chain from "./chains/Chain";
 import { HabitContext } from "../state/HabitContext";
 
 const ChainsContainer = () => {
-  const { chains, clearCompleted } = useContext(HabitContext);
-
-  const [storedDate, setStoredDate] = useState<number>(new Date().getMinutes());
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const currentDate = new Date().getMinutes();
-      if (storedDate !== currentDate) {
-        setStoredDate(currentDate);
-        clearCompleted();
-      }
-    }, 10000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  const { chains } = useContext(HabitContext);
 
   return (
     <View style={styles.chainsContainer}>

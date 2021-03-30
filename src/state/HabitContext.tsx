@@ -181,13 +181,13 @@ export const HabitProvider = (props: any) => {
 
   const clearCompleted = () => {
     let tempChains = [...chains];
-    tempChains.forEach((chain) => {
-      chain.habits.forEach((habit) => {
+    tempChains.map((chain) => {
+      chain.habits.map((habit) => {
         habit.isComplete = false;
       });
       chain.isComplete = false;
     });
-    setChains(tempChains);
+    updateChains(tempChains);
   };
 
   return (
