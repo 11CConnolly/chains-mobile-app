@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
 import { IChain } from "../components/chains/Chain";
-import { sleep } from "../utils/utils";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface IContextProps {
   chains: IChain[];
@@ -10,7 +10,6 @@ interface IContextProps {
   addChain: (title: string, habit: string) => void;
   markHabit: (chainIndex: number, habitIndex: number) => void;
   markChain: (chainIndex: number) => void;
-  clearCompleted: () => void;
 }
 
 export const HabitContext = createContext<IContextProps>({
@@ -21,99 +20,140 @@ export const HabitContext = createContext<IContextProps>({
   addChain: (text: string) => null,
   markHabit: (chainIndex: number, habitIndex: number) => null,
   markChain: (chainIndex: number) => null,
-  clearCompleted: () => null,
 });
 
+const InitialChains = [
+  {
+    title: "Morning",
+    index: 0,
+    habits: [
+      {
+        text: "Shower",
+        index: 0,
+        isComplete: true,
+        tryMarkHabit: undefined,
+      },
+      {
+        text: "Make bed",
+        index: 1,
+        isComplete: true,
+        tryMarkHabit: undefined,
+      },
+      {
+        text: "Meditate",
+        index: 2,
+        isComplete: true,
+        tryMarkHabit: undefined,
+      },
+    ],
+    isComplete: false,
+  },
+  {
+    title: "Evening Routine",
+    index: 1,
+    habits: [
+      {
+        text: "Journal",
+        index: 0,
+        isComplete: false,
+        tryMarkHabit: undefined,
+      },
+      {
+        text: "Read 20 minutes",
+        index: 1,
+        isComplete: false,
+        tryMarkHabit: undefined,
+      },
+    ],
+    isComplete: false,
+  },
+  {
+    title: "Exercise",
+    index: 2,
+    habits: [
+      {
+        text: "Dynamic Stretch",
+        index: 0,
+        isComplete: false,
+        tryMarkHabit: undefined,
+      },
+      {
+        text: "Run",
+        index: 1,
+        isComplete: false,
+        tryMarkHabit: undefined,
+      },
+      {
+        text: "Mid body",
+        index: 2,
+        isComplete: false,
+        tryMarkHabit: undefined,
+      },
+      {
+        text: "Static stretch",
+        index: 3,
+        isComplete: false,
+        tryMarkHabit: undefined,
+      },
+    ],
+    isComplete: false,
+  },
+];
+
 export const HabitProvider = (props: any) => {
-  // TODO Dummy values added on Mount to initialise the values to be gotten from async storage
-  const [chains, setChains] = useState<IChain[]>([
-    {
-      title: "Morning",
-      index: 0,
-      habits: [
-        {
-          text: "Shower",
-          index: 0,
-          isComplete: true,
-          tryMarkHabit: undefined,
-        },
-        {
-          text: "Make bed",
-          index: 1,
-          isComplete: true,
-          tryMarkHabit: undefined,
-        },
-        {
-          text: "Meditate",
-          index: 2,
-          isComplete: false,
-          tryMarkHabit: undefined,
-        },
-      ],
-      isComplete: false,
-    },
-    {
-      title: "Evening Routine",
-      index: 1,
-      habits: [
-        {
-          text: "Journal",
-          index: 0,
-          isComplete: false,
-          tryMarkHabit: undefined,
-        },
-        {
-          text: "Read 20 minutes",
-          index: 1,
-          isComplete: false,
-          tryMarkHabit: undefined,
-        },
-      ],
-      isComplete: false,
-    },
-    {
-      title: "Exercise",
-      index: 2,
-      habits: [
-        {
-          text: "Dynamic Stretch",
-          index: 0,
-          isComplete: false,
-          tryMarkHabit: undefined,
-        },
-        {
-          text: "Run",
-          index: 1,
-          isComplete: false,
-          tryMarkHabit: undefined,
-        },
-        {
-          text: "Mid body",
-          index: 2,
-          isComplete: false,
-          tryMarkHabit: undefined,
-        },
-        {
-          text: "Static stretch",
-          index: 3,
-          isComplete: false,
-          tryMarkHabit: undefined,
-        },
-      ],
-      isComplete: false,
-    },
-  ]);
+  const [chains, setChains] = useState<IChain[]>([]);
 
   // TODO Value of current day to be taken from async storage
-  const [minute, setMinute] = useState<Number>(4);
+  const [date, setDate] = useState<Number>(4);
 
+  // Gets out completed chains on mount
   useEffect(() => {
-    const currentMinute = new Date().getDate();
-    if (minute !== currentMinute) {
-      setMinute(() => currentMinute);
-      clearCompleted();
+    const currentDate = new Date().getDate();
+    AsyncStorage.getItem("CHAINS_VALUES").then((value) => {
+      if (value) {
+        const storedChains = JSON.parse(value);
+        if (date !== currentDate) {
+          clearAndUpdateChains(storedChains);
+          setDate(currentDate);
+        } else {
+          updateChains(storedChains);
+        }
+      } else {
+        updateChains([]);
+      }
+    });
+  }, []);
+
+  // Sends the chains to storage once whenever they're editted
+  useEffect(() => {
+    if (chains !== null || chains !== undefined || chains !== []) {
+      AsyncStorage.setItem("CHAINS_VALUES", JSON.stringify(chains));
     }
-  });
+  }, [chains]);
+
+  // Ensures chains are updates with accurate isComplete
+  const updateChains = (newChains: IChain[]) => {
+    setChains(
+      newChains.map((chain) => {
+        const isComplete = chain.habits.reduce(
+          (sum, habit) => sum && habit.isComplete,
+          true
+        );
+        return { ...chain, isComplete };
+      })
+    );
+  };
+
+  // Used to refresh chains on a new day
+  const clearAndUpdateChains = (chainsToClear: IChain[]) => {
+    let tempChains = [...chainsToClear];
+    tempChains.map((chain) => {
+      chain.habits.map((habit) => {
+        habit.isComplete = false;
+      });
+    });
+    updateChains(tempChains);
+  };
 
   const addHabit = (chainIndex: number, text: string) => {
     let items = [...chains];
@@ -161,19 +201,6 @@ export const HabitProvider = (props: any) => {
     updateChains(items);
   };
 
-  // Ensures chains are updates with accurate isComplete
-  const updateChains = (newChains: IChain[]) => {
-    setChains(
-      newChains.map((chain) => {
-        const isComplete = chain.habits.reduce(
-          (sum, habit) => sum && habit.isComplete,
-          true
-        );
-        return { ...chain, isComplete };
-      })
-    );
-  };
-
   const toggleChain = (chainIndex: number) => {
     setChains((list) =>
       list.map((chain, i) =>
@@ -187,16 +214,6 @@ export const HabitProvider = (props: any) => {
     );
   };
 
-  const clearCompleted = () => {
-    let tempChains = [...chains];
-    tempChains.map((chain) => {
-      chain.habits.map((habit) => {
-        habit.isComplete = false;
-      });
-    });
-    updateChains(tempChains);
-  };
-
   return (
     <HabitContext.Provider
       value={{
@@ -207,7 +224,7 @@ export const HabitProvider = (props: any) => {
         addChain,
         markHabit: toggleHabit,
         markChain: toggleChain,
-        clearCompleted,
+        clearCompleted: clearAndUpdateChains,
       }}
     >
       {props.children}
