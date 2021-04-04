@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
 import { IChain } from "../components/chains/Chain";
+import { sleep } from "../utils/utils";
 
 interface IContextProps {
   chains: IChain[];
@@ -24,88 +25,95 @@ export const HabitContext = createContext<IContextProps>({
 });
 
 export const HabitProvider = (props: any) => {
-  const [chains, setChains] = useState<IChain[]>([]);
+  // TODO Dummy values added on Mount to initialise the values to be gotten from async storage
+  const [chains, setChains] = useState<IChain[]>([
+    {
+      title: "Morning",
+      index: 0,
+      habits: [
+        {
+          text: "Shower",
+          index: 0,
+          isComplete: true,
+          tryMarkHabit: undefined,
+        },
+        {
+          text: "Make bed",
+          index: 1,
+          isComplete: true,
+          tryMarkHabit: undefined,
+        },
+        {
+          text: "Meditate",
+          index: 2,
+          isComplete: false,
+          tryMarkHabit: undefined,
+        },
+      ],
+      isComplete: false,
+    },
+    {
+      title: "Evening Routine",
+      index: 1,
+      habits: [
+        {
+          text: "Journal",
+          index: 0,
+          isComplete: false,
+          tryMarkHabit: undefined,
+        },
+        {
+          text: "Read 20 minutes",
+          index: 1,
+          isComplete: false,
+          tryMarkHabit: undefined,
+        },
+      ],
+      isComplete: false,
+    },
+    {
+      title: "Exercise",
+      index: 2,
+      habits: [
+        {
+          text: "Dynamic Stretch",
+          index: 0,
+          isComplete: false,
+          tryMarkHabit: undefined,
+        },
+        {
+          text: "Run",
+          index: 1,
+          isComplete: false,
+          tryMarkHabit: undefined,
+        },
+        {
+          text: "Mid body",
+          index: 2,
+          isComplete: false,
+          tryMarkHabit: undefined,
+        },
+        {
+          text: "Static stretch",
+          index: 3,
+          isComplete: false,
+          tryMarkHabit: undefined,
+        },
+      ],
+      isComplete: false,
+    },
+  ]);
 
-  // TODO Dummy values added on Mount to initialise the values to be taken away
+  // TODO Value of current day to be taken from async storage
+  const [minute, setMinute] = useState<Number>(4);
+
   useEffect(() => {
-    setChains([
-      {
-        title: "Morning",
-        index: 0,
-        habits: [
-          {
-            text: "Shower",
-            index: 0,
-            isComplete: false,
-            tryMarkHabit: undefined,
-          },
-          {
-            text: "Make bed",
-            index: 1,
-            isComplete: false,
-            tryMarkHabit: undefined,
-          },
-          {
-            text: "Meditate",
-            index: 2,
-            isComplete: false,
-            tryMarkHabit: undefined,
-          },
-        ],
-        isComplete: false,
-      },
-      {
-        title: "Evening Routine",
-        index: 1,
-        habits: [
-          {
-            text: "Journal",
-            index: 0,
-            isComplete: false,
-            tryMarkHabit: undefined,
-          },
-          {
-            text: "Read 20 minutes",
-            index: 1,
-            isComplete: false,
-            tryMarkHabit: undefined,
-          },
-        ],
-        isComplete: false,
-      },
-      {
-        title: "Exercise",
-        index: 2,
-        habits: [
-          {
-            text: "Dynamic Stretch",
-            index: 0,
-            isComplete: false,
-            tryMarkHabit: undefined,
-          },
-          {
-            text: "Run",
-            index: 1,
-            isComplete: false,
-            tryMarkHabit: undefined,
-          },
-          {
-            text: "Mid body",
-            index: 2,
-            isComplete: false,
-            tryMarkHabit: undefined,
-          },
-          {
-            text: "Static stretch",
-            index: 3,
-            isComplete: false,
-            tryMarkHabit: undefined,
-          },
-        ],
-        isComplete: false,
-      },
-    ]);
-  }, []);
+    const currentMinute = new Date().getDate();
+    if (minute !== currentMinute) {
+      setMinute(() => currentMinute);
+      clearCompleted();
+    }
+  });
 
   const addHabit = (chainIndex: number, text: string) => {
     let items = [...chains];
@@ -185,7 +193,6 @@ export const HabitProvider = (props: any) => {
       chain.habits.map((habit) => {
         habit.isComplete = false;
       });
-      chain.isComplete = false;
     });
     updateChains(tempChains);
   };

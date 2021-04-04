@@ -6,7 +6,7 @@ import Chain from "./chains/Chain";
 import { HabitContext } from "../state/HabitContext";
 
 const ChainsContainer = () => {
-  const { chains } = useContext(HabitContext);
+  const { chains, clearCompleted } = useContext(HabitContext);
 
   return (
     <View style={styles.chainsContainer}>
