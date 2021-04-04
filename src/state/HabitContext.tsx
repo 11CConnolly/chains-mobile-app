@@ -103,18 +103,24 @@ const InitialChains = [
 export const HabitProvider = (props: any) => {
   const [chains, setChains] = useState<IChain[]>([]);
 
-  // TODO Value of current day to be taken from async storage
-  const [date, setDate] = useState<Number>(4);
-
-  // Gets out completed chains on mount
+  // Gets completed chains on mount refreshing on new day
   useEffect(() => {
-    const currentDate = new Date().getDate();
-    AsyncStorage.getItem("CHAINS_VALUES").then((value) => {
+    AsyncStorage.getItem("CHAINSAPP::CHAINS").then(async (value) => {
       if (value) {
         const storedChains = JSON.parse(value);
-        if (date !== currentDate) {
+        const currentDate = new Date().getDate();
+
+        let storedDate = 0;
+
+        await AsyncStorage.getItem("CHAINSAPP::DATE").then((value) => {
+          if (value) {
+            storedDate = JSON.parse(value);
+          }
+        });
+
+        if (storedDate !== currentDate) {
           clearAndUpdateChains(storedChains);
-          setDate(currentDate);
+          updateDate(currentDate);
         } else {
           updateChains(storedChains);
         }
@@ -125,9 +131,16 @@ export const HabitProvider = (props: any) => {
   }, []);
 
   // Sends the chains to storage once whenever they're editted
+  const updateDate = (currentDate: number) => {
+    if (currentDate !== null || currentDate !== undefined) {
+      AsyncStorage.setItem("CHAINSAPP::DATE", JSON.stringify(currentDate));
+    }
+  };
+
+  // Sends the chains to storage once whenever they're editted
   useEffect(() => {
     if (chains !== null || chains !== undefined || chains !== []) {
-      AsyncStorage.setItem("CHAINS_VALUES", JSON.stringify(chains));
+      AsyncStorage.setItem("CHAINSAPP::CHAINS", JSON.stringify(chains));
     }
   }, [chains]);
 
@@ -224,7 +237,6 @@ export const HabitProvider = (props: any) => {
         addChain,
         markHabit: toggleHabit,
         markChain: toggleChain,
-        clearCompleted: clearAndUpdateChains,
       }}
     >
       {props.children}

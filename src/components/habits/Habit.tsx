@@ -1,17 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  Animated,
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { TouchableOpacity } from "react-native";
 import * as Animatable from "react-native-animatable";
 import CustomText from "../CustomText";
 import styles from "../../common/styles";
 import DialogBox, { IDialogBoxProps } from "../DialogBox";
 import ProgressBar from "./ProgressBar";
-import Toast, { BaseToastProps } from "react-native-toast-message";
+import Toast from "react-native-toast-message";
 
 export interface IHabit {
   index: number;
@@ -61,7 +55,7 @@ const Habit = (props: IHabit) => {
 
   const handlePress = () => {
     if (tryMarkHabit!(index) && AnimationRef) {
-      AnimationRef.current?.pulse(500);
+      AnimationRef.current?.pulse(1000);
     } else {
       Toast.show({
         type: "error",

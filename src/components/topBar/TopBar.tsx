@@ -5,6 +5,7 @@ import { HabitContext } from "../../state/HabitContext";
 import { useFonts, Kalam_300Light } from "@expo-google-fonts/kalam";
 import * as Animatable from "react-native-animatable";
 import { sleep } from "../../utils/utils";
+import Toast from "react-native-toast-message";
 
 const TopBar = (props: any) => {
   const { chains } = useContext(HabitContext);
@@ -34,6 +35,14 @@ const TopBar = (props: any) => {
       animateChangeRef.current?.bounce(1600);
       setDone(true);
       sleep(25)
+        .then(() => {
+          Toast.show({
+            type: "success",
+            position: "bottom",
+            text1: "Well done!! 🎉🎉",
+            text2: "All your chains have been completed for the day!",
+          });
+        })
         .then(() => {
           animateTextRef.current?.bounce(1600);
         })
