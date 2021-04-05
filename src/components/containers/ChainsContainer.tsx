@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View, ScrollView } from "react-native";
-import styles from "../common/styles";
-import AddChainButton from "./chains/AddChainButton";
-import Chain from "./chains/Chain";
-import { HabitContext } from "../state/HabitContext";
+import styles from "../../common/styles";
+import AddChainButton from "../chains/AddChainButton";
+import Chain from "../chains/Chain";
+import { HabitContext } from "../../state/HabitContext";
 
 const ChainsContainer = () => {
   const { chains } = useContext(HabitContext);

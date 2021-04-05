@@ -4,7 +4,7 @@ import styles, { CLOUDS_WHITE, LIGHT_GREEN } from "../../common/styles";
 import { HabitContext } from "../../state/HabitContext";
 import { useFonts, Kalam_300Light } from "@expo-google-fonts/kalam";
 import * as Animatable from "react-native-animatable";
-import { sleep } from "../../utils/utils";
+import { sleep } from "../../common/utils";
 import Toast from "react-native-toast-message";
 
 const TopBar = (props: any) => {

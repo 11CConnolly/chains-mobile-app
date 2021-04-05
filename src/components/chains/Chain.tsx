@@ -4,7 +4,7 @@ import styles from "../../common/styles";
 import { HabitContext } from "../../state/HabitContext";
 import Habit, { IHabit } from "../habits/Habit";
 import AddHabitButton from "../habits/AddHabitButton";
-import CustomText from "../CustomText";
+import CustomText from "../common/CustomText";
 
 export interface IChain {
   title: string;

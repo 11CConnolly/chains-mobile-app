@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native";
-import ChainsContainer from "../components/ChainsContainer";
+import ChainsContainer from "../components/containers/ChainsContainer";
 import TopBar from "../components/topBar/TopBar";
 import styles from "../common/styles";
 import { HabitProvider } from "../state/HabitContext";

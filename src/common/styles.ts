@@ -114,4 +114,22 @@ export default StyleSheet.create({
     height: 3,
     top: CHAIN_SIZE / 2,
   },
+
+  /* STYLES FOR MILESTONES SCREEN */
+  // Style for Container
+  milestonesContainer: {
+    flex: 1,
+    padding: 2,
+    alignSelf: "flex-start",
+    flexDirection: "column",
+    flexWrap: "nowrap",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    alignContent: "flex-start",
+  },
+  milestonesTitle: {
+    alignSelf: "flex-start",
+    color: BLACK,
+    fontSize: 24,
+  },
 });

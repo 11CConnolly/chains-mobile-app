@@ -3,8 +3,10 @@ import react, { useContext } from "react";
 import { TouchableOpacity, Text, View } from "react-native";
 import styles from "../../common/styles";
 import { HabitContext } from "../../state/HabitContext";
-import CustomText from "../CustomText";
-import NewChainDialogBox, { INewChainDialogBox } from "../NewChainDialogBox";
+import CustomText from "../common/CustomText";
+import NewChainDialogBox, {
+  INewChainDialogBox,
+} from "../dialogs/NewChainDialogBox";
 
 export interface IAddChainButton {}
 
