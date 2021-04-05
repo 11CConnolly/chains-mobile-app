@@ -1,20 +1,14 @@
 import React from "react";
-import { Platform, StatusBar, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, Text } from "react-native";
+import styles from "../common/styles";
+import { HabitProvider } from "../state/HabitContext";
 
 export default function MilestonesScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Milestones screen</Text>
-    </View>
+    <SafeAreaView style={styles.screenContainer}>
+      <HabitProvider>
+        <Text>Hello World</Text>
+      </HabitProvider>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    flex: 1,
-    backgroundColor: "#ffffff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

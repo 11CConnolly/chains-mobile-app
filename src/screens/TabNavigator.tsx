@@ -50,9 +50,8 @@ const TabNavigator = () => {
           inactiveTintColor: "gray",
         }}
       >
-        <Tab.Screen name="Chains" component={MainScreen}></Tab.Screen>
         <Tab.Screen name="Milestones" component={MilestonesScreen}></Tab.Screen>
-        <Tab.Screen name="Account" component={AccountScreen}></Tab.Screen>
+        <Tab.Screen name="Chains" component={MainScreen}></Tab.Screen>
         <Tab.Screen name="Settings" component={SettingsScreen}></Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>
