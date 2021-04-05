@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import styles from "../../common/styles";
 import { HabitContext } from "../../state/HabitContext";
-import Habit, { IHabit } from "../habits/Habit";
-import AddHabitButton from "../habits/AddHabitButton";
+import Habit, { IHabit } from "./habits/Habit";
+import AddHabitButton from "./habits/AddHabitButton";
 import CustomText from "../common/CustomText";
 
 export interface IChain {

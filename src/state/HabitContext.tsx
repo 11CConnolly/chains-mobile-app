@@ -131,18 +131,22 @@ export const HabitProvider = (props: any) => {
   }, []);
 
   // Sends the chains to storage once whenever they're editted
-  const updateDate = (currentDate: number) => {
-    if (currentDate !== null || currentDate !== undefined) {
-      AsyncStorage.setItem("CHAINSAPP::DATE", JSON.stringify(currentDate));
-    }
-  };
-
-  // Sends the chains to storage once whenever they're editted
   useEffect(() => {
     if (chains !== null || chains !== undefined || chains !== []) {
       AsyncStorage.setItem("CHAINSAPP::CHAINS", JSON.stringify(chains));
     }
   }, [chains]);
+
+  /*
+   * METHODS FOR POPULATING ON MOUNT
+   */
+
+  // Sends the chains to storage once whenever they're editted
+  const updateDate = (currentDate: number) => {
+    if (currentDate !== null || currentDate !== undefined) {
+      AsyncStorage.setItem("CHAINSAPP::DATE", JSON.stringify(currentDate));
+    }
+  };
 
   // Ensures chains are updates with accurate isComplete
   const updateChains = (newChains: IChain[]) => {
@@ -167,6 +171,10 @@ export const HabitProvider = (props: any) => {
     });
     updateChains(tempChains);
   };
+
+  /*
+   * FUNCTIONAL METHODS FOR DYNAMIC CHAINS
+   */
 
   const addHabit = (chainIndex: number, text: string) => {
     let items = [...chains];

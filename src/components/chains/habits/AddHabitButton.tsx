@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import { TouchableOpacity, Text, View } from "react-native";
-import styles from "../../common/styles";
-import DialogBox, { IDialogBoxProps } from "../dialogs/DialogBox";
-import { HabitContext } from "../../state/HabitContext";
-import CustomText from "../common/CustomText";
+import styles from "../../../common/styles";
+import DialogBox, { IDialogBoxProps } from "../../dialogs/DialogBox";
+import { HabitContext } from "../../../state/HabitContext";
+import CustomText from "../../common/CustomText";
 
 export interface IAddHabitButton {
   chainIndex: number;

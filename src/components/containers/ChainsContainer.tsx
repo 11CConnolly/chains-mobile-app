@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { View, ScrollView } from "react-native";
 import styles from "../../common/styles";
 import AddChainButton from "../chains/AddChainButton";

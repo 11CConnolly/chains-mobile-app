@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import Dialog from "react-native-dialog";
 import { ALIZARIN_RED } from "../../common/styles";
-import DeleteDialogBox, { IDeleteDialogBoxProps } from "./DeleteDialogBox";
+import DeleteDialogBox, {
+  IDeleteDialogBoxProps,
+} from "../chains/DeleteDialogBox";
 
 export interface IDialogBoxProps {
   title: string;
