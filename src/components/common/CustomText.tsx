@@ -15,7 +15,14 @@ export interface ICustomText extends TextProps {
 }
 
 const CustomText = (props: ICustomText) => {
-  const { style, sansSerif = false, heavy = false, children } = props;
+  const {
+    style,
+    sansSerif = false,
+    heavy = false,
+    children,
+    ellipsizeMode,
+    numberOfLines,
+  } = props;
 
   let [fontsLoaded] = useFonts({
     Kalam_300Light,
@@ -28,17 +35,17 @@ const CustomText = (props: ICustomText) => {
   return (
     <Text
       style={{
-        ...props.style,
-        fontFamily: props.sansSerif
+        ...style,
+        fontFamily: sansSerif
           ? "sans-serif"
-          : props.heavy
+          : heavy
           ? "Kalam_400Regular"
           : "Kalam_300Light",
       }}
-      ellipsizeMode={props.ellipsizeMode}
-      numberOfLines={props.numberOfLines}
+      ellipsizeMode={ellipsizeMode}
+      numberOfLines={numberOfLines}
     >
-      {props.children}
+      {children}
     </Text>
   );
 };
