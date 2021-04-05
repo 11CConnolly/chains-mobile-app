@@ -19,7 +19,6 @@ const MilestonesContainer = () => {
         { number: 500, isComplete: false },
         { number: 1000, isComplete: false },
       ],
-      index: 0,
     },
   ]);
 
@@ -27,7 +26,7 @@ const MilestonesContainer = () => {
     <View style={styles.chainsContainer}>
       <ScrollView>
         {milestoneChains.map((milestoneChain, i) => (
-          <MilestoneChain {...milestoneChain} index={i} key={i++} />
+          <MilestoneChain {...milestoneChain} key={i++} />
         ))}
       </ScrollView>
     </View>

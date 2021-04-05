@@ -56,7 +56,7 @@ const Habit = (props: IHabit) => {
   const handlePress = () => {
     if (tryMarkHabit!(index) && AnimationRef) {
       AnimationRef.current?.pulse(1000);
-    } else {
+    } else if (!isComplete) {
       Toast.show({
         type: "error",
         position: "bottom",

@@ -102,7 +102,7 @@ const InitialChains = [
 
 export const HabitProvider = (props: any) => {
   const [chains, setChains] = useState<IChain[]>([]);
-  const [totalCompletedChains, setTotalCompletedChains] = useState(0);
+  const [totalCompletedChains, setTotalCompletedChains] = useState<number>(0);
 
   // Gets completed chains on mount refreshing on new day
   useEffect(() => {
@@ -120,11 +120,6 @@ export const HabitProvider = (props: any) => {
         });
 
         if (storedDate !== currentDate) {
-          // If I'm in a new day, put the total number of todays completed chains into total completed chains
-          setTotalCompletedChains(
-            totalCompletedChains + getTotalCompleteChains()
-          );
-
           // Now clear the chains for a new day
           clearAndUpdateChains(storedChains);
           updateDate(currentDate);
@@ -144,6 +139,16 @@ export const HabitProvider = (props: any) => {
       AsyncStorage.setItem("CHAINSAPP::CHAINS", JSON.stringify(chains));
     }
   }, [chains]);
+
+  // Store the Historical Completed Chains
+  useEffect(() => {
+    if (totalCompletedChains !== null || totalCompletedChains !== undefined) {
+      AsyncStorage.setItem(
+        "CHAINSAPP::TOTAL",
+        JSON.stringify(totalCompletedChains)
+      );
+    }
+  }, [totalCompletedChains]);
 
   // Sends the chains to storage once whenever they're editted
   const updateDate = (currentDate: number) => {
@@ -229,14 +234,6 @@ export const HabitProvider = (props: any) => {
   /*
    * METHODS FOR ENABLING HISTORIAL DATA CHAINS
    */
-
-  const getTotalCompleteChains = () => {
-    let count = 0;
-    chains.map((chain) => {
-      count = chain.isComplete ? count + 1 : count;
-    });
-    return count;
-  };
 
   return (
     <HabitContext.Provider

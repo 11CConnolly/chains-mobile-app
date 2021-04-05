@@ -6,7 +6,6 @@ import CustomText from "../common/CustomText";
 import Milestone, { IMilestone } from "./Milestone";
 
 export interface IMilestoneChain {
-  index: number;
   title: string;
   milestones: IMilestone[];
 }
