@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import styles from "../../common/styles";
 import MilestoneChain, { IMilestoneChain } from "../Milestones/MilestoneChain";

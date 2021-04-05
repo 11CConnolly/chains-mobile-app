@@ -4,22 +4,22 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface IContextProps {
   chains: IChain[];
+  totalCompletedChains: number;
   setChains: React.Dispatch<React.SetStateAction<IChain[]>>;
   addHabit: (chainIndex: number, text: string) => void;
   removeHabit: (chainIndex: number, habitIndex: number) => void;
   addChain: (title: string, habit: string) => void;
   markHabit: (chainIndex: number, habitIndex: number) => void;
-  markChain: (chainIndex: number) => void;
 }
 
 export const HabitContext = createContext<IContextProps>({
   chains: [],
+  totalCompletedChains: 0,
   setChains: () => null,
   addHabit: (chainIndex: number, text: string) => null,
   removeHabit: (chainIndex: number, habitIndex: number) => null,
   addChain: (text: string) => null,
   markHabit: (chainIndex: number, habitIndex: number) => null,
-  markChain: (chainIndex: number) => null,
 });
 
 const InitialChains = [
@@ -102,6 +102,7 @@ const InitialChains = [
 
 export const HabitProvider = (props: any) => {
   const [chains, setChains] = useState<IChain[]>([]);
+  const [totalCompletedChains, setTotalCompletedChains] = useState(0);
 
   // Gets completed chains on mount refreshing on new day
   useEffect(() => {
@@ -119,9 +120,16 @@ export const HabitProvider = (props: any) => {
         });
 
         if (storedDate !== currentDate) {
+          // If I'm in a new day, put the total number of todays completed chains into total completed chains
+          setTotalCompletedChains(
+            totalCompletedChains + getTotalCompleteChains()
+          );
+
+          // Now clear the chains for a new day
           clearAndUpdateChains(storedChains);
           updateDate(currentDate);
         } else {
+          // Just update the chain
           updateChains(storedChains);
         }
       } else {
@@ -136,10 +144,6 @@ export const HabitProvider = (props: any) => {
       AsyncStorage.setItem("CHAINSAPP::CHAINS", JSON.stringify(chains));
     }
   }, [chains]);
-
-  /*
-   * METHODS FOR POPULATING ON MOUNT
-   */
 
   // Sends the chains to storage once whenever they're editted
   const updateDate = (currentDate: number) => {
@@ -222,29 +226,28 @@ export const HabitProvider = (props: any) => {
     updateChains(items);
   };
 
-  const toggleChain = (chainIndex: number) => {
-    setChains((list) =>
-      list.map((chain, i) =>
-        i === chainIndex
-          ? {
-              ...chain,
-              isComplete: !chain.isComplete,
-            }
-          : chain
-      )
-    );
+  /*
+   * METHODS FOR ENABLING HISTORIAL DATA CHAINS
+   */
+
+  const getTotalCompleteChains = () => {
+    let count = 0;
+    chains.map((chain) => {
+      count = chain.isComplete ? count + 1 : count;
+    });
+    return count;
   };
 
   return (
     <HabitContext.Provider
       value={{
         chains,
+        totalCompletedChains,
         setChains,
         addHabit,
         removeHabit,
         addChain,
         markHabit: toggleHabit,
-        markChain: toggleChain,
       }}
     >
       {props.children}
