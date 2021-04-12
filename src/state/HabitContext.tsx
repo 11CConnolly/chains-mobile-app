@@ -4,7 +4,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface IContextProps {
   chains: IChain[];
-  totalCompletedChains: number;
   setChains: React.Dispatch<React.SetStateAction<IChain[]>>;
   addHabit: (chainIndex: number, text: string) => void;
   removeHabit: (chainIndex: number, habitIndex: number) => void;
@@ -14,7 +13,6 @@ interface IContextProps {
 
 export const HabitContext = createContext<IContextProps>({
   chains: [],
-  totalCompletedChains: 0,
   setChains: () => null,
   addHabit: (chainIndex: number, text: string) => null,
   removeHabit: (chainIndex: number, habitIndex: number) => null,
@@ -102,7 +100,6 @@ const InitialChains = [
 
 export const HabitProvider = (props: any) => {
   const [chains, setChains] = useState<IChain[]>([]);
-  const [totalCompletedChains, setTotalCompletedChains] = useState<number>(0);
 
   // Gets completed chains on mount refreshing on new day
   useEffect(() => {
@@ -140,7 +137,7 @@ export const HabitProvider = (props: any) => {
     }
   }, [chains]);
 
-  // Store the Historical Completed Chains
+  /* // Store the Historical Completed Chains
   useEffect(() => {
     if (totalCompletedChains !== null || totalCompletedChains !== undefined) {
       AsyncStorage.setItem(
@@ -148,7 +145,7 @@ export const HabitProvider = (props: any) => {
         JSON.stringify(totalCompletedChains)
       );
     }
-  }, [totalCompletedChains]);
+  }, [totalCompletedChains]); */
 
   // Sends the chains to storage once whenever they're editted
   const updateDate = (currentDate: number) => {
@@ -239,7 +236,6 @@ export const HabitProvider = (props: any) => {
     <HabitContext.Provider
       value={{
         chains,
-        totalCompletedChains,
         setChains,
         addHabit,
         removeHabit,

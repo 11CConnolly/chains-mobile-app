@@ -12,7 +12,7 @@ export interface IMilestoneChain {
 
 const MilestoneChain = (props: IMilestoneChain) => {
   const { title, milestones } = props;
-  const { totalCompletedChains } = useContext(HabitContext);
+  const { chains } = useContext(HabitContext);
 
   return (
     <View style={styles.chainWrapper}>
@@ -24,8 +24,8 @@ const MilestoneChain = (props: IMilestoneChain) => {
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View style={styles.chain}>
           {milestones.map((milestone, i) => {
-            const complete =
-              totalCompletedChains >= milestone.number ? true : false;
+            const complete = false;
+            //  totalCompletedChains >= milestone.number ? true : false;
 
             return (
               <Milestone
