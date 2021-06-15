@@ -4,6 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface IContextProps {
   chains: IChain[];
+  completeChains: number;
   setChains: React.Dispatch<React.SetStateAction<IChain[]>>;
   addHabit: (chainIndex: number, text: string) => void;
   removeHabit: (chainIndex: number, habitIndex: number) => void;
@@ -13,6 +14,7 @@ interface IContextProps {
 
 export const HabitContext = createContext<IContextProps>({
   chains: [],
+  completeChains: 0,
   setChains: () => null,
   addHabit: (chainIndex: number, text: string) => null,
   removeHabit: (chainIndex: number, habitIndex: number) => null,
@@ -100,6 +102,8 @@ const InitialChains = [
 
 export const HabitProvider = (props: any) => {
   const [chains, setChains] = useState<IChain[]>([]);
+  const [completeChains, setCompleteChains] = useState<number>(0);
+  // List of completed chains to check, or hashmap to check quickly for that O(1)
 
   // Gets completed chains on mount refreshing on new day
   useEffect(() => {
@@ -128,6 +132,11 @@ export const HabitProvider = (props: any) => {
         updateChains([]);
       }
     });
+    AsyncStorage.getItem("CHAINSAPP::COMPLETEDCHAINS").then(async (value) => {
+      if (value) {
+        setCompleteChains(JSON.parse(value));
+      }
+    });
   }, []);
 
   // Sends the chains to storage once whenever they're editted
@@ -137,15 +146,12 @@ export const HabitProvider = (props: any) => {
     }
   }, [chains]);
 
-  /* // Store the Historical Completed Chains
+  // Store the Historical Completed Chains
   useEffect(() => {
-    if (totalCompletedChains !== null || totalCompletedChains !== undefined) {
-      AsyncStorage.setItem(
-        "CHAINSAPP::TOTAL",
-        JSON.stringify(totalCompletedChains)
-      );
+    if (completeChains !== null || completeChains !== undefined) {
+      AsyncStorage.setItem("CHAINSAPP::TOTAL", JSON.stringify(completeChains));
     }
-  }, [totalCompletedChains]); */
+  }, [completeChains]);
 
   // Sends the chains to storage once whenever they're editted
   const updateDate = (currentDate: number) => {
@@ -225,6 +231,17 @@ export const HabitProvider = (props: any) => {
     let item = { ...items[chainIndex] };
     item.habits[habitIndex].isComplete = !item.habits[habitIndex].isComplete;
     items[chainIndex] = item;
+
+    console.log(completeChains);
+    // Check if the chain was completed
+    if (
+      item.habits.length === habitIndex &&
+      item.habits[habitIndex].isComplete
+    ) {
+      console.log(completeChains);
+      setCompleteChains(completeChains + 1);
+    }
+
     updateChains(items);
   };
 
