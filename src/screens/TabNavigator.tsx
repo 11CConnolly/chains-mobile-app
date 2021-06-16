@@ -6,8 +6,6 @@ import SettingsScreen from "./SettingsScreen";
 import { Ionicons } from "@expo/vector-icons";
 import { ALIZARIN_RED } from "../common/styles";
 import MilestonesScreen from "./MilestonesScreen";
-import ChartsScreen from "./ChartsScreen";
-import AccountScreen from "./AccountScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -50,8 +48,8 @@ const TabNavigator = () => {
           inactiveTintColor: "gray",
         }}
       >
-        <Tab.Screen name="Milestones" component={MilestonesScreen}></Tab.Screen>
         <Tab.Screen name="Chains" component={MainScreen}></Tab.Screen>
+        <Tab.Screen name="Milestones" component={MilestonesScreen}></Tab.Screen>
         <Tab.Screen name="Settings" component={SettingsScreen}></Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ScrollView, Text, View } from "react-native";
 import styles from "../../common/styles";
 import { HabitContext } from "../../state/HabitContext";
@@ -14,6 +14,10 @@ const MilestoneChain = (props: IMilestoneChain) => {
   const { title, milestones } = props;
   const { completeChains } = useContext(HabitContext);
 
+  useEffect(() => {
+    console.log("Hello" + completeChains);
+  }, [completeChains]);
+
   return (
     <View style={styles.chainWrapper}>
       <View style={styles.chainTitleWrapper}>
@@ -24,13 +28,11 @@ const MilestoneChain = (props: IMilestoneChain) => {
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View style={styles.chain}>
           {milestones.map((milestone, i) => {
-            const complete = completeChains >= milestone.number ? true : false;
-
             return (
               <Milestone
                 {...milestone}
                 key={i++}
-                isComplete={complete}
+                isComplete={completeChains >= milestone.number}
               ></Milestone>
             );
           })}

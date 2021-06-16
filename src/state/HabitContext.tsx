@@ -232,14 +232,14 @@ export const HabitProvider = (props: any) => {
     item.habits[habitIndex].isComplete = !item.habits[habitIndex].isComplete;
     items[chainIndex] = item;
 
-    console.log(completeChains);
     // Check if the chain was completed
     if (
-      item.habits.length === habitIndex &&
+      item.habits.length - 1 === habitIndex &&
       item.habits[habitIndex].isComplete
     ) {
-      console.log(completeChains);
-      setCompleteChains(completeChains + 1);
+      const newTotalChains = completeChains + 1;
+      console.log(newTotalChains);
+      setCompleteChains(newTotalChains);
     }
 
     updateChains(items);
@@ -253,6 +253,7 @@ export const HabitProvider = (props: any) => {
     <HabitContext.Provider
       value={{
         chains,
+        completeChains,
         setChains,
         addHabit,
         removeHabit,
