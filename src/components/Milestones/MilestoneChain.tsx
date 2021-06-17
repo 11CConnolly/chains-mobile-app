@@ -14,10 +14,6 @@ const MilestoneChain = (props: IMilestoneChain) => {
   const { title, milestones } = props;
   const { completeChains } = useContext(HabitContext);
 
-  useEffect(() => {
-    console.log("Hello" + completeChains);
-  }, [completeChains]);
-
   return (
     <View style={styles.chainWrapper}>
       <View style={styles.chainTitleWrapper}>

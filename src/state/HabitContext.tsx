@@ -237,9 +237,7 @@ export const HabitProvider = (props: any) => {
       item.habits.length - 1 === habitIndex &&
       item.habits[habitIndex].isComplete
     ) {
-      const newTotalChains = completeChains + 1;
-      console.log(newTotalChains);
-      setCompleteChains(newTotalChains);
+      setCompleteChains(completeChains + 1);
     }
 
     updateChains(items);
