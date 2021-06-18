@@ -149,7 +149,10 @@ export const HabitProvider = (props: any) => {
   // Store the Historical Completed Chains
   useEffect(() => {
     if (completeChains !== null || completeChains !== undefined) {
-      AsyncStorage.setItem("CHAINSAPP::TOTAL", JSON.stringify(completeChains));
+      AsyncStorage.setItem(
+        "CHAINSAPP::COMPLETEDCHAINS",
+        JSON.stringify(completeChains)
+      );
     }
   }, [completeChains]);
 

@@ -119,7 +119,7 @@ export default StyleSheet.create({
   // Style for Container
   milestonesContainer: {
     flex: 1,
-    padding: 2,
+    padding: 1,
     alignSelf: "flex-start",
     flexDirection: "column",
     flexWrap: "nowrap",

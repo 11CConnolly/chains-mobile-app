@@ -2,8 +2,7 @@ import React, { useContext, useState } from "react";
 import { View, Text, Dimensions } from "react-native";
 import { ContributionGraph, LineChart } from "react-native-chart-kit";
 import { ScrollView } from "react-native-gesture-handler";
-import styles from "../../common/styles";
-import { HabitContext } from "../../state/HabitContext";
+import styles, { MIDNIGHT_BLUE } from "../../common/styles";
 import MilestoneChain, { IMilestoneChain } from "../Milestones/MilestoneChain";
 
 export interface ICommit {
@@ -48,18 +47,33 @@ const MilestonesContainer = () => {
   ]);
 
   return (
-    <View style={styles.chainsContainer}>
-      <View>
+    <View style={styles.milestonesContainer}>
+      <ScrollView>
+        {milestoneChains.map((milestoneChain, i) => (
+          <MilestoneChain {...milestoneChain} key={i++} />
+        ))}
+      </ScrollView>
+      <ScrollView>
+        {milestoneChains.map((milestoneChain, i) => (
+          <MilestoneChain {...milestoneChain} key={i++} />
+        ))}
+      </ScrollView>
+      <View
+        style={{
+          paddingTop: 10,
+          paddingBottom: 10,
+        }}
+      >
         <ContributionGraph
           values={commitsData}
           endDate={new Date("2017-04-01")}
-          numDays={105}
-          width={Dimensions.get("window").width}
+          numDays={112}
+          width={Dimensions.get("window").width - 1}
           height={220}
           chartConfig={{
             backgroundColor: "#e26a00",
-            backgroundGradientFrom: "#fb8c00",
-            backgroundGradientTo: "#ffa726",
+            backgroundGradientFrom: MIDNIGHT_BLUE,
+            backgroundGradientTo: "#333F66",
             decimalPlaces: 2, // optional, defaults to 2dp
             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -72,16 +86,9 @@ const MilestonesContainer = () => {
               stroke: "#ffa726",
             },
           }}
-          tooltipDataAttrs={(value) => {
-            return { "data-tooltip": "Tooltip: " + value };
-          }}
+          tooltipDataAttrs={{ "data-tooltip": "Tooltip" }}
         />
       </View>
-      <ScrollView>
-        {milestoneChains.map((milestoneChain, i) => (
-          <MilestoneChain {...milestoneChain} key={i++} />
-        ))}
-      </ScrollView>
     </View>
   );
 };
