@@ -7,7 +7,7 @@ export const MIDNIGHT_BLUE = "#2c3e50";
 export const PURPLE = "#a15dbd";
 export const BLACK = "#000000";
 
-const CHAIN_SIZE = 90;
+const CHAIN_SIZE = 80;
 
 export default StyleSheet.create({
   // Style for MainScreen
@@ -78,6 +78,9 @@ export default StyleSheet.create({
     borderRadius: CHAIN_SIZE / 2,
     alignItems: "center",
     justifyContent: "center",
+    shadowColor: "black",
+    shadowOpacity: 0.9,
+    elevation: 10,
   },
   incomplete: {
     backgroundColor: MIDNIGHT_BLUE,
@@ -90,7 +93,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     padding: 10,
     color: CLOUDS_WHITE,
-    fontSize: 16,
+    fontSize: 14,
   },
   // Styles for Add Buttons
   addButton: {
@@ -131,5 +134,13 @@ export default StyleSheet.create({
     alignSelf: "flex-start",
     color: BLACK,
     fontSize: 24,
+  },
+  milestoneCircle: {
+    width: CHAIN_SIZE - 8,
+    height: CHAIN_SIZE - 8,
+    borderRadius: 50,
+    position: "absolute",
+    borderWidth: 1.5,
+    borderColor: CLOUDS_WHITE,
   },
 });

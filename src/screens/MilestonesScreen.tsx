@@ -1,15 +1,12 @@
 import React from "react";
 import { SafeAreaView, View, Text } from "react-native";
-import styles from "../common/styles";
-import TopBar from "../components/chains/TopBar";
+import styles, { CLOUDS_WHITE } from "../common/styles";
 import MilestonesContainer from "../components/containers/MilestonesContainer";
 
 const MilestonesScreen = () => {
   return (
     <SafeAreaView style={styles.screenContainer}>
-      <View style={styles.topBar}>
-        <Text style={{ ...styles.habitText, fontSize: 32 }}>Hello</Text>
-      </View>
+      <View style={styles.topBar}></View>
       <MilestonesContainer />
     </SafeAreaView>
   );

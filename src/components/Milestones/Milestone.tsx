@@ -17,6 +17,7 @@ const Milestone = (props: IMilestone) => {
       <View
         style={[styles.habit, isComplete ? styles.complete : styles.incomplete]}
       >
+        <View style={styles.milestoneCircle}></View>
         <CustomText
           sansSerif
           maxFontSizeMultiplier={0}

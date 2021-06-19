@@ -29,7 +29,7 @@ const MilestonesContainer = () => {
 
   // Milestone Stuff
 
-  const [milestoneChains, setmilestoneChains] = useState<IMilestoneChain[]>([
+  const [milestoneChains, setMilestoneChains] = useState<IMilestoneChain[]>([
     {
       title: "Completed Chains",
       milestones: [
@@ -48,16 +48,6 @@ const MilestonesContainer = () => {
 
   return (
     <View style={styles.milestonesContainer}>
-      <ScrollView>
-        {milestoneChains.map((milestoneChain, i) => (
-          <MilestoneChain {...milestoneChain} key={i++} />
-        ))}
-      </ScrollView>
-      <ScrollView>
-        {milestoneChains.map((milestoneChain, i) => (
-          <MilestoneChain {...milestoneChain} key={i++} />
-        ))}
-      </ScrollView>
       <View
         style={{
           paddingTop: 10,
@@ -89,6 +79,16 @@ const MilestonesContainer = () => {
           tooltipDataAttrs={{ "data-tooltip": "Tooltip" }}
         />
       </View>
+      <ScrollView>
+        {milestoneChains.map((milestoneChain, i) => (
+          <MilestoneChain {...milestoneChain} key={i++} />
+        ))}
+      </ScrollView>
+      <ScrollView>
+        {milestoneChains.map((milestoneChain, i) => (
+          <MilestoneChain {...milestoneChain} key={i++} />
+        ))}
+      </ScrollView>
     </View>
   );
 };
