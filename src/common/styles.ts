@@ -80,7 +80,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     shadowColor: "black",
     shadowOpacity: 0.9,
-    elevation: 10,
+    elevation: 8,
   },
   incomplete: {
     backgroundColor: MIDNIGHT_BLUE,
@@ -93,7 +93,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     padding: 10,
     color: CLOUDS_WHITE,
-    fontSize: 14,
+    fontSize: 13,
   },
   // Styles for Add Buttons
   addButton: {

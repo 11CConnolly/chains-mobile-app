@@ -1,10 +1,13 @@
 import React, { useState, createContext, useEffect } from "react";
 import { IChain } from "../components/chains/Chain";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ICommit } from "../components/containers/MilestonesContainer";
 
 interface IContextProps {
   chains: IChain[];
-  completeChains: number;
+  chartCommitData: ICommit[];
+  dailyChainsNum: number;
+  completeChainsNum: number;
   setChains: React.Dispatch<React.SetStateAction<IChain[]>>;
   addHabit: (chainIndex: number, text: string) => void;
   removeHabit: (chainIndex: number, habitIndex: number) => void;
@@ -14,7 +17,9 @@ interface IContextProps {
 
 export const HabitContext = createContext<IContextProps>({
   chains: [],
-  completeChains: 0,
+  chartCommitData: [],
+  dailyChainsNum: 0,
+  completeChainsNum: 0,
   setChains: () => null,
   addHabit: (chainIndex: number, text: string) => null,
   removeHabit: (chainIndex: number, habitIndex: number) => null,
@@ -22,88 +27,15 @@ export const HabitContext = createContext<IContextProps>({
   markHabit: (chainIndex: number, habitIndex: number) => null,
 });
 
-const InitialChains = [
-  {
-    title: "Morning",
-    index: 0,
-    habits: [
-      {
-        text: "Shower",
-        index: 0,
-        isComplete: true,
-        tryMarkHabit: undefined,
-      },
-      {
-        text: "Make bed",
-        index: 1,
-        isComplete: true,
-        tryMarkHabit: undefined,
-      },
-      {
-        text: "Meditate",
-        index: 2,
-        isComplete: true,
-        tryMarkHabit: undefined,
-      },
-    ],
-    isComplete: false,
-  },
-  {
-    title: "Evening Routine",
-    index: 1,
-    habits: [
-      {
-        text: "Journal",
-        index: 0,
-        isComplete: false,
-        tryMarkHabit: undefined,
-      },
-      {
-        text: "Read 20 minutes",
-        index: 1,
-        isComplete: false,
-        tryMarkHabit: undefined,
-      },
-    ],
-    isComplete: false,
-  },
-  {
-    title: "Exercise",
-    index: 2,
-    habits: [
-      {
-        text: "Dynamic Stretch",
-        index: 0,
-        isComplete: false,
-        tryMarkHabit: undefined,
-      },
-      {
-        text: "Run",
-        index: 1,
-        isComplete: false,
-        tryMarkHabit: undefined,
-      },
-      {
-        text: "Mid body",
-        index: 2,
-        isComplete: false,
-        tryMarkHabit: undefined,
-      },
-      {
-        text: "Static stretch",
-        index: 3,
-        isComplete: false,
-        tryMarkHabit: undefined,
-      },
-    ],
-    isComplete: false,
-  },
-];
-
 export const HabitProvider = (props: any) => {
   const [chains, setChains] = useState<IChain[]>([]);
-  const [completeChains, setCompleteChains] = useState<number>(0);
+  const [chartCommitData, setChartCommitData] = useState<ICommit[]>([]);
+
+  const [dailyChainsNum, setDailyChainsNum] = useState<number>(0);
+  const [completeChainsNum, setCompleteChainsNum] = useState<number>(0);
+
   // List of completed chains to check, or hashmap to check quickly for that O(1)
+  const [checkedHabitsList, setCheckedHabitsList] = useState<string[]>([]);
 
   // Gets completed chains on mount refreshing on new day
   useEffect(() => {
@@ -121,20 +53,31 @@ export const HabitProvider = (props: any) => {
         });
 
         if (storedDate !== currentDate) {
-          // Now clear the chains for a new day
+          // ON A NEW DAY, PERFORM THESE ACTIONS
           clearAndUpdateChains(storedChains);
           updateDate(currentDate);
+          setDailyChainsNum(0);
         } else {
-          // Just update the chain
+          // SAME DAY, PERFORM THESE ACTIONS
           updateChains(storedChains);
         }
       } else {
         updateChains([]);
       }
     });
+    AsyncStorage.getItem("CHAINSAPP::DAILYCHAINS").then(async (value) => {
+      if (value) {
+        setDailyChainsNum(JSON.parse(value));
+      }
+    });
     AsyncStorage.getItem("CHAINSAPP::COMPLETEDCHAINS").then(async (value) => {
       if (value) {
-        setCompleteChains(JSON.parse(value));
+        setCompleteChainsNum(JSON.parse(value));
+      }
+    });
+    AsyncStorage.getItem("CHAINSAPP::CHARTCOMMITDATA").then(async (value) => {
+      if (value) {
+        setChartCommitData(JSON.parse(value));
       }
     });
   }, []);
@@ -146,17 +89,44 @@ export const HabitProvider = (props: any) => {
     }
   }, [chains]);
 
-  // Store the Historical Completed Chains
   useEffect(() => {
-    if (completeChains !== null || completeChains !== undefined) {
+    if (
+      chartCommitData !== null ||
+      chartCommitData !== undefined ||
+      chartCommitData !== []
+    ) {
       AsyncStorage.setItem(
-        "CHAINSAPP::COMPLETEDCHAINS",
-        JSON.stringify(completeChains)
+        "CHAINSAPP::CHARTCOMMITDATA",
+        JSON.stringify(chartCommitData)
       );
     }
-  }, [completeChains]);
+  }, [chartCommitData]);
 
-  // Sends the chains to storage once whenever they're editted
+  // Store the Daily Completed Chains
+  useEffect(() => {
+    if (
+      dailyChainsNum !== null ||
+      dailyChainsNum !== undefined ||
+      dailyChainsNum !== 0
+    ) {
+      AsyncStorage.setItem(
+        "CHAINSAPP::DAILYCHAINS",
+        JSON.stringify(dailyChainsNum)
+      );
+    }
+  }, [dailyChainsNum]);
+
+  // Store the Historical Completed Chains
+  useEffect(() => {
+    if (completeChainsNum !== null || completeChainsNum !== undefined) {
+      AsyncStorage.setItem(
+        "CHAINSAPP::COMPLETEDCHAINS",
+        JSON.stringify(completeChainsNum)
+      );
+    }
+  }, [completeChainsNum]);
+
+  // Stores the current data to test against on the same day or a new day
   const updateDate = (currentDate: number) => {
     if (currentDate !== null || currentDate !== undefined) {
       AsyncStorage.setItem("CHAINSAPP::DATE", JSON.stringify(currentDate));
@@ -175,6 +145,8 @@ export const HabitProvider = (props: any) => {
       })
     );
   };
+
+  const updateChartCommitData = () => {};
 
   // Used to refresh chains on a new day
   const clearAndUpdateChains = (chainsToClear: IChain[]) => {
@@ -236,11 +208,14 @@ export const HabitProvider = (props: any) => {
     items[chainIndex] = item;
 
     // Check if the chain was completed
+    // TODO Check if chain has already been completed
     if (
       item.habits.length - 1 === habitIndex &&
       item.habits[habitIndex].isComplete
     ) {
-      setCompleteChains(completeChains + 1);
+      // Update daily number of chains complete, complete chains and chart commit data
+      setDailyChainsNum(dailyChainsNum + 1);
+      setCompleteChainsNum(completeChainsNum + 1);
     }
 
     updateChains(items);
@@ -254,7 +229,9 @@ export const HabitProvider = (props: any) => {
     <HabitContext.Provider
       value={{
         chains,
-        completeChains,
+        chartCommitData,
+        dailyChainsNum,
+        completeChainsNum,
         setChains,
         addHabit,
         removeHabit,

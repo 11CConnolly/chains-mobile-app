@@ -12,7 +12,7 @@ export interface IMilestoneChain {
 
 const MilestoneChain = (props: IMilestoneChain) => {
   const { title, milestones } = props;
-  const { completeChains } = useContext(HabitContext);
+  const { completeChainsNum } = useContext(HabitContext);
 
   return (
     <View style={styles.chainWrapper}>
@@ -28,7 +28,7 @@ const MilestoneChain = (props: IMilestoneChain) => {
               <Milestone
                 {...milestone}
                 key={i++}
-                isComplete={completeChains >= milestone.number}
+                isComplete={completeChainsNum >= milestone.number}
               ></Milestone>
             );
           })}
