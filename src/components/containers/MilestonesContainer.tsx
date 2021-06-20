@@ -1,11 +1,7 @@
-import React, { useContext, useMemo, useState } from "react";
-import { View, Text, Dimensions } from "react-native";
-import { ContributionGraph, LineChart } from "react-native-chart-kit";
+import React, { useContext, useState } from "react";
+import { View, Dimensions } from "react-native";
+import { ContributionGraph } from "react-native-chart-kit";
 import { ScrollView } from "react-native-gesture-handler";
-import {
-  chartCommitConstants,
-  milestonesConstants,
-} from "../../common/constants";
 import styles, { MIDNIGHT_BLUE } from "../../common/styles";
 import { HabitContext } from "../../state/HabitContext";
 import MilestoneChain, {
@@ -77,9 +73,9 @@ const MilestonesContainer = () => {
         <ContributionGraph
           values={chartCommitData}
           endDate={new Date()}
-          numDays={90}
-          width={Dimensions.get("window").width - 1}
-          height={220}
+          numDays={96}
+          width={Dimensions.get("window").width}
+          height={210}
           chartConfig={{
             backgroundColor: "#e26a00",
             backgroundGradientFrom: MIDNIGHT_BLUE,

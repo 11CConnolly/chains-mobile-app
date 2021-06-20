@@ -30,8 +30,8 @@ export const HabitContext = createContext<IContextProps>({
 export const HabitProvider = (props: any) => {
   const [chains, setChains] = useState<IChain[]>([]);
   const [chartCommitData, setChartCommitData] = useState<ICommit[]>([
-    { date: "Fri Jun 18 2021", count: 1 },
-    { date: "Sat Jun 19 2021", count: 2 },
+    { date: "Thu Aug 9 2001", count: 0 },
+    { date: "Fri Aug 10 2001", count: 1 },
   ]);
 
   const [dailyChainsNum, setDailyChainsNum] = useState<number>(0);
@@ -65,7 +65,7 @@ export const HabitProvider = (props: any) => {
           updateChains(storedChains);
           AsyncStorage.getItem("CHAINSAPP::DAILYCHAINS").then(async (value) => {
             if (value) {
-              setDailyChainsNum(JSON.parse(value));
+              setDailyChainsNum(parseInt(JSON.parse(value)));
             }
           });
         }
@@ -74,13 +74,17 @@ export const HabitProvider = (props: any) => {
       }
     });
     AsyncStorage.getItem("CHAINSAPP::COMPLETEDCHAINS").then(async (value) => {
-      if (value) {
-        setCompleteChainsNum(JSON.parse(value));
+      if (value != null) {
+        setCompleteChainsNum(parseInt(JSON.parse(value)));
+      } else {
+        setCompleteChainsNum(0);
       }
     });
     AsyncStorage.getItem("CHAINSAPP::CHARTCOMMITDATA").then(async (value) => {
-      if (value) {
-        setCompleteChainsNum(JSON.parse(value));
+      if (value != null) {
+        setChartCommitData(JSON.parse(value));
+      } else {
+        setChartCommitData([]);
       }
     });
   }, []);
@@ -185,6 +189,19 @@ export const HabitProvider = (props: any) => {
     updateChains(tempChains);
   };
 
+  const seenChainBefore = (chainIndex: number) => {
+    if (checkedHabitsList.includes(chainIndex)) {
+      // Have seen before
+      return true;
+    } else {
+      // Haven't seen before
+      const seen = checkedHabitsList.slice();
+      seen.push(chainIndex);
+      setCheckedHabitsList(seen);
+      return false;
+    }
+  };
+
   // Update daily number of chains complete, complete chains and chart commit data
   const performUpdate = () => {
     setDailyChainsNum(dailyChainsNum + 1);
@@ -242,14 +259,11 @@ export const HabitProvider = (props: any) => {
 
     if (
       item.habits.length - 1 === habitIndex &&
-      item.habits[habitIndex].isComplete &&
-      !checkedHabitsList.includes(chainIndex)
+      item.habits[habitIndex].isComplete
     ) {
-      const seen = checkedHabitsList.slice();
-      seen.push(chainIndex);
-      setCheckedHabitsList(seen);
-
-      performUpdate();
+      if (!seenChainBefore(chainIndex)) {
+        performUpdate();
+      }
     }
 
     updateChains(items);

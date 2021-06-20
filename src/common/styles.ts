@@ -20,6 +20,7 @@ export default StyleSheet.create({
   },
   // Style for Container
   chainsContainer: {
+    width: "100%",
     flex: 1,
     padding: 2,
     alignSelf: "flex-start",
@@ -54,6 +55,7 @@ export default StyleSheet.create({
     borderBottomColor: BLACK,
     borderRadius: 3,
     maxHeight: 34,
+    width: "80%",
   },
   chainTitle: {
     alignSelf: "flex-start",

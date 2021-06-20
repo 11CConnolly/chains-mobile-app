@@ -31,7 +31,6 @@ const MilestoneChain = (props: IMilestoneChain) => {
       break;
     default:
       CompletedNumber = 0;
-      console.log("Not good");
       break;
   }
 
