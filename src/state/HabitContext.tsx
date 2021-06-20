@@ -32,15 +32,13 @@ export const HabitProvider = (props: any) => {
   const [chartCommitData, setChartCommitData] = useState<ICommit[]>([
     { date: "Fri Jun 18 2021", count: 1 },
     { date: "Sat Jun 19 2021", count: 2 },
-    { date: "Sun Jun 20 2021", count: 4 },
-    { date: "Mon Jun 21 2021", count: 4 },
   ]);
 
   const [dailyChainsNum, setDailyChainsNum] = useState<number>(0);
   const [completeChainsNum, setCompleteChainsNum] = useState<number>(0);
 
   // List of completed chains to check, or hashmap to check quickly for that O(1)
-  const [checkedHabitsList, setCheckedHabitsList] = useState<string[]>([]);
+  const [checkedHabitsList, setCheckedHabitsList] = useState<number[]>([]);
 
   // Gets completed chains on mount refreshing on new day
   useEffect(() => {
@@ -94,6 +92,7 @@ export const HabitProvider = (props: any) => {
     }
   }, [chains]);
 
+  // Store the Chart Commit data
   useEffect(() => {
     if (
       chartCommitData !== null ||
@@ -153,17 +152,20 @@ export const HabitProvider = (props: any) => {
 
   // Add 1 to current day of chart commit data
   const updateChartCommitData = () => {
+    // Find a commit with the same name
     const commit = chartCommitData.find(
-      (commit) => commit.date === new Date().toDateString()
+      (c) => c.date === new Date().toDateString()
     );
 
-    console.log(commit);
+    const data = chartCommitData.slice();
 
     if (commit === undefined) {
-      chartCommitData.push({ date: new Date().toDateString(), count: 1 });
+      // Add a commit to the values
+      data.push({ date: new Date().toDateString(), count: 1 });
+      setChartCommitData(data);
     } else {
       setChartCommitData(
-        chartCommitData.map((c) =>
+        data.map((c) =>
           c.date === commit.date
             ? { date: commit.date, count: commit.count + 1 }
             : c
@@ -181,6 +183,13 @@ export const HabitProvider = (props: any) => {
       });
     });
     updateChains(tempChains);
+  };
+
+  // Update daily number of chains complete, complete chains and chart commit data
+  const performUpdate = () => {
+    setDailyChainsNum(dailyChainsNum + 1);
+    setCompleteChainsNum(completeChainsNum + 1);
+    updateChartCommitData();
   };
 
   /*
@@ -231,16 +240,16 @@ export const HabitProvider = (props: any) => {
     item.habits[habitIndex].isComplete = !item.habits[habitIndex].isComplete;
     items[chainIndex] = item;
 
-    // Check if the chain was completed
-    // TODO Check if chain has already been completed
     if (
       item.habits.length - 1 === habitIndex &&
-      item.habits[habitIndex].isComplete
+      item.habits[habitIndex].isComplete &&
+      !checkedHabitsList.includes(chainIndex)
     ) {
-      // Update daily number of chains complete, complete chains and chart commit data
-      setDailyChainsNum(dailyChainsNum + 1);
-      setCompleteChainsNum(completeChainsNum + 1);
-      updateChartCommitData();
+      const seen = checkedHabitsList.slice();
+      seen.push(chainIndex);
+      setCheckedHabitsList(seen);
+
+      performUpdate();
     }
 
     updateChains(items);
