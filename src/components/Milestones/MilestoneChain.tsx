@@ -5,14 +5,35 @@ import { HabitContext } from "../../state/HabitContext";
 import CustomText from "../common/CustomText";
 import Milestone, { IMilestone } from "./Milestone";
 
+export enum TYPE_TO_CHECK {
+  TotalChains,
+  DailyChains,
+}
+
 export interface IMilestoneChain {
   title: string;
   milestones: IMilestone[];
+  checkType: TYPE_TO_CHECK;
 }
 
 const MilestoneChain = (props: IMilestoneChain) => {
-  const { title, milestones } = props;
-  const { completeChainsNum } = useContext(HabitContext);
+  const { title, milestones, checkType } = props;
+  const { completeChainsNum, dailyChainsNum } = useContext(HabitContext);
+
+  // Define the type of thing we want to check as our milestone
+  let CompletedNumber = 0;
+  switch (checkType) {
+    case TYPE_TO_CHECK.TotalChains:
+      CompletedNumber = completeChainsNum;
+      break;
+    case TYPE_TO_CHECK.DailyChains:
+      CompletedNumber = dailyChainsNum;
+      break;
+    default:
+      CompletedNumber = 0;
+      console.log("Not good");
+      break;
+  }
 
   return (
     <View style={styles.chainWrapper}>
@@ -24,11 +45,13 @@ const MilestoneChain = (props: IMilestoneChain) => {
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View style={styles.chain}>
           {milestones.map((milestone, i) => {
+            const showProgress = i !== milestones.length - 1;
             return (
               <Milestone
                 {...milestone}
                 key={i++}
-                isComplete={completeChainsNum >= milestone.number}
+                isComplete={CompletedNumber >= milestone.number}
+                showProgress={showProgress}
               ></Milestone>
             );
           })}

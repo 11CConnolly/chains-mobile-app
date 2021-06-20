@@ -7,10 +7,11 @@ import CustomText from "../common/CustomText";
 export interface IMilestone {
   number: number;
   isComplete: boolean;
+  showProgress?: boolean;
 }
 
 const Milestone = (props: IMilestone) => {
-  let { number, isComplete } = props;
+  let { number, isComplete, showProgress = true } = props;
 
   return (
     <>
@@ -28,7 +29,7 @@ const Milestone = (props: IMilestone) => {
           {number}
         </CustomText>
       </View>
-      <ProgressBar inProgress={isComplete}></ProgressBar>
+      {showProgress && <ProgressBar inProgress={isComplete}></ProgressBar>}
     </>
   );
 };
