@@ -29,7 +29,12 @@ export const HabitContext = createContext<IContextProps>({
 
 export const HabitProvider = (props: any) => {
   const [chains, setChains] = useState<IChain[]>([]);
-  const [chartCommitData, setChartCommitData] = useState<ICommit[]>([]);
+  const [chartCommitData, setChartCommitData] = useState<ICommit[]>([
+    { date: "Fri Jun 18 2021", count: 1 },
+    { date: "Sat Jun 19 2021", count: 2 },
+    { date: "Sun Jun 20 2021", count: 4 },
+    { date: "Mon Jun 21 2021", count: 4 },
+  ]);
 
   const [dailyChainsNum, setDailyChainsNum] = useState<number>(0);
   const [completeChainsNum, setCompleteChainsNum] = useState<number>(0);
@@ -60,14 +65,14 @@ export const HabitProvider = (props: any) => {
         } else {
           // SAME DAY, PERFORM THESE ACTIONS
           updateChains(storedChains);
+          AsyncStorage.getItem("CHAINSAPP::DAILYCHAINS").then(async (value) => {
+            if (value) {
+              setDailyChainsNum(JSON.parse(value));
+            }
+          });
         }
       } else {
         updateChains([]);
-      }
-    });
-    AsyncStorage.getItem("CHAINSAPP::DAILYCHAINS").then(async (value) => {
-      if (value) {
-        setDailyChainsNum(JSON.parse(value));
       }
     });
     AsyncStorage.getItem("CHAINSAPP::COMPLETEDCHAINS").then(async (value) => {
@@ -77,7 +82,7 @@ export const HabitProvider = (props: any) => {
     });
     AsyncStorage.getItem("CHAINSAPP::CHARTCOMMITDATA").then(async (value) => {
       if (value) {
-        setChartCommitData(JSON.parse(value));
+        setCompleteChainsNum(JSON.parse(value));
       }
     });
   }, []);
@@ -146,7 +151,26 @@ export const HabitProvider = (props: any) => {
     );
   };
 
-  const updateChartCommitData = () => {};
+  // Add 1 to current day of chart commit data
+  const updateChartCommitData = () => {
+    const commit = chartCommitData.find(
+      (commit) => commit.date === new Date().toDateString()
+    );
+
+    console.log(commit);
+
+    if (commit === undefined) {
+      chartCommitData.push({ date: new Date().toDateString(), count: 1 });
+    } else {
+      setChartCommitData(
+        chartCommitData.map((c) =>
+          c.date === commit.date
+            ? { date: commit.date, count: commit.count + 1 }
+            : c
+        )
+      );
+    }
+  };
 
   // Used to refresh chains on a new day
   const clearAndUpdateChains = (chainsToClear: IChain[]) => {
@@ -216,6 +240,7 @@ export const HabitProvider = (props: any) => {
       // Update daily number of chains complete, complete chains and chart commit data
       setDailyChainsNum(dailyChainsNum + 1);
       setCompleteChainsNum(completeChainsNum + 1);
+      updateChartCommitData();
     }
 
     updateChains(items);

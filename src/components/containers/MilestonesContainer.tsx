@@ -2,6 +2,10 @@ import React, { useContext, useMemo, useState } from "react";
 import { View, Text, Dimensions } from "react-native";
 import { ContributionGraph, LineChart } from "react-native-chart-kit";
 import { ScrollView } from "react-native-gesture-handler";
+import {
+  chartCommitConstants,
+  milestonesConstants,
+} from "../../common/constants";
 import styles, { MIDNIGHT_BLUE } from "../../common/styles";
 import { HabitContext } from "../../state/HabitContext";
 import MilestoneChain, {
@@ -18,10 +22,7 @@ const MilestonesContainer = () => {
   // Chart Stuff
   const { chartCommitData } = useContext(HabitContext);
 
-  const commitsData = chartCommitData;
-
   // Milestone Stuff
-
   const [milestoneChains, setMilestoneChains] = useState<IMilestoneChain[]>([
     {
       title: "Completed Chains I",
@@ -74,7 +75,7 @@ const MilestonesContainer = () => {
         }}
       >
         <ContributionGraph
-          values={commitsData}
+          values={chartCommitData}
           endDate={new Date()}
           numDays={90}
           width={Dimensions.get("window").width - 1}

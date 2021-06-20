@@ -1,4 +1,6 @@
-const InitialChains = [
+import { IChain } from "../components/chains/Chain";
+
+export const InitialChains: IChain[] = [
   {
     title: "Morning",
     index: 0,
