@@ -1,11 +1,13 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { View, Text } from "react-native";
-import styles, { CLOUDS_WHITE, LIGHT_GREEN } from "../../common/styles";
+import styles, { BLACK, CLOUDS_WHITE, LIGHT_GREEN } from "../../common/styles";
 import { HabitContext } from "../../state/HabitContext";
 import { useFonts, Kalam_300Light } from "@expo-google-fonts/kalam";
 import * as Animatable from "react-native-animatable";
 import { sleep } from "../../common/utils";
 import Toast from "react-native-toast-message";
+import { Ionicons } from "@expo/vector-icons";
+import InformationIcon from "../InformationIcon";
 
 const TopBar = (props: any) => {
   const { chains } = useContext(HabitContext);
@@ -64,45 +66,48 @@ const TopBar = (props: any) => {
   if (!fontsLoaded) return <></>;
 
   return (
-    <View style={styles.topBar}>
-      <Animatable.View ref={animateChangeRef}>
-        <Text
-          style={{
-            ...styles.chainCount,
-            fontFamily: "Kalam_300Light",
-            color: done ? LIGHT_GREEN : CLOUDS_WHITE,
-          }}
-        >
-          {finishedChains}
-        </Text>
-      </Animatable.View>
+    <>
+      <View style={styles.topBar}>
+        <Animatable.View ref={animateChangeRef}>
+          <Text
+            style={{
+              ...styles.chainCount,
+              fontFamily: "Kalam_300Light",
+              color: done ? LIGHT_GREEN : CLOUDS_WHITE,
+            }}
+          >
+            {finishedChains}
+          </Text>
+        </Animatable.View>
 
-      <Animatable.View ref={animateTextRef}>
-        <Text
-          style={{
-            ...styles.chainCount,
-            fontSize: 24,
-            fontFamily: "Kalam_300Light",
-            color: done ? LIGHT_GREEN : CLOUDS_WHITE,
-          }}
-        >
-          {" "}
-          out of{" "}
-        </Text>
-      </Animatable.View>
+        <Animatable.View ref={animateTextRef}>
+          <Text
+            style={{
+              ...styles.chainCount,
+              fontSize: 24,
+              fontFamily: "Kalam_300Light",
+              color: done ? LIGHT_GREEN : CLOUDS_WHITE,
+            }}
+          >
+            {" "}
+            out of{" "}
+          </Text>
+        </Animatable.View>
 
-      <Animatable.View ref={animateDoneRef}>
-        <Text
-          style={{
-            ...styles.chainCount,
-            fontFamily: "Kalam_300Light",
-            color: done ? LIGHT_GREEN : CLOUDS_WHITE,
-          }}
-        >
-          {chains.length}
-        </Text>
-      </Animatable.View>
-    </View>
+        <Animatable.View ref={animateDoneRef}>
+          <Text
+            style={{
+              ...styles.chainCount,
+              fontFamily: "Kalam_300Light",
+              color: done ? LIGHT_GREEN : CLOUDS_WHITE,
+            }}
+          >
+            {chains.length}
+          </Text>
+        </Animatable.View>
+        <InformationIcon />
+      </View>
+    </>
   );
 };
 
