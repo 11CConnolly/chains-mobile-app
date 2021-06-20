@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { TouchableOpacity, Text, View } from "react-native";
+import { TouchableOpacity } from "react-native";
 import styles from "../../../common/styles";
 import DialogBox, { IDialogBoxProps } from "../../dialogs/DialogBox";
 import { HabitContext } from "../../../state/HabitContext";

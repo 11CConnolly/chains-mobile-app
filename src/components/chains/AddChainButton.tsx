@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import react, { useContext } from "react";
-import { TouchableOpacity, Text, View } from "react-native";
+import React, { useState, useContext } from "react";
+import { TouchableOpacity } from "react-native";
 import styles from "../../common/styles";
 import { HabitContext } from "../../state/HabitContext";
 import CustomText from "../common/CustomText";

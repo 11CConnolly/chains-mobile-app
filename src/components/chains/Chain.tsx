@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import styles from "../../common/styles";
 import { HabitContext } from "../../state/HabitContext";
 import Habit, { IHabit } from "./habits/Habit";

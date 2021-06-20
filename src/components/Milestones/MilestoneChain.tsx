@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { ScrollView, Text, View } from "react-native";
 import styles from "../../common/styles";
 import { HabitContext } from "../../state/HabitContext";

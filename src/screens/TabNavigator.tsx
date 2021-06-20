@@ -2,7 +2,6 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MainScreen from "./MainScreen";
 import { NavigationContainer } from "@react-navigation/native";
-import SettingsScreen from "./SettingsScreen";
 import { Ionicons } from "@expo/vector-icons";
 import { ALIZARIN_RED } from "../common/styles";
 import MilestonesScreen from "./MilestonesScreen";
