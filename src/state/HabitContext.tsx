@@ -65,7 +65,7 @@ export const HabitProvider = (props: any) => {
           updateChains(storedChains);
           AsyncStorage.getItem("CHAINSAPP::DAILYCHAINS").then(async (value) => {
             if (value) {
-              setDailyChainsNum(parseInt(JSON.parse(value)));
+              setDailyChainsNum(JSON.parse(value));
             }
           });
         }
@@ -75,7 +75,7 @@ export const HabitProvider = (props: any) => {
     });
     AsyncStorage.getItem("CHAINSAPP::COMPLETEDCHAINS").then(async (value) => {
       if (value != null) {
-        setCompleteChainsNum(parseInt(JSON.parse(value)));
+        setCompleteChainsNum(JSON.parse(value));
       } else {
         setCompleteChainsNum(0);
       }
