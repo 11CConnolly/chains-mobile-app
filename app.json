@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "chains-mobile-app",
+    "name": "Chains Habit Tracker",
     "slug": "chains-mobile-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/chains-circle.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -13,21 +13,30 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.callumc11.chainsmobileapp",
+      "buildNumber": "1.0.2",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.callumc11.chainsmobileapp",
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": []
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": ""
+    "description": "Chains is a simple habit tracker which breaks down big changes into easy to manage chains of habits",
+    "scripts": {
+      "test": "jest"
+    },
+    "jest": {
+      "preset": "jest-expo"
+    }
   }
 }
