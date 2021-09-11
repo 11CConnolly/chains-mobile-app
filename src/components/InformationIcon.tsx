@@ -29,7 +29,7 @@ Long press a habit to edit or delete it.
 Any feedback, questions, problems you have, or things you want to see please email me at: callumc11@gmail.com :)`;
 
   const handleOK = () => {
-    dispatch({ type: "setVisible", value: true });
+    dispatch({ type: "setVisible", value: false });
   };
 
   const infoDialogProps: IInfoDialogProps = {

@@ -6,9 +6,9 @@
     "orientation": "portrait",
     "icon": "./assets/chains-sq.png",
     "splash": {
-      "image": "./assets/chains-blank.png",
+      "image": "./assets/chains-icon-512.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#a15dbd"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
