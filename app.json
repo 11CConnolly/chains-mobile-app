@@ -4,11 +4,11 @@
     "slug": "chains-mobile-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/chains-circle.png",
+    "icon": "./assets/chains-sq.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/chains-icon-512.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#a15dbd"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,13 +23,13 @@
       "package": "com.callumc11.chainsmobileapp",
       "versionCode": 2,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/chains-foreground.png",
+        "backgroundColor": "#a15dbd"
       },
       "permissions": []
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/chains-blank.png"
     },
     "description": "Chains is a simple habit tracker which breaks down big changes into easy to manage chains of habits",
     "scripts": {
