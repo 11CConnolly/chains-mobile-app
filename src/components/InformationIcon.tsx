@@ -1,18 +1,19 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
-import { View } from "react-native";
-import {
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
+import React, { useState, useReducer } from "react";
 import { CLOUDS_WHITE } from "../common/styles";
-import { INewChainDialogBox } from "./chains/NewChainDialogBox";
-import DialogBox, { IDialogBoxProps } from "./dialogs/DialogBox";
 import InfoDialog, { IInfoDialogProps } from "./dialogs/InfoDialog";
 
 const InformationIcon = () => {
-  const [visible, setVisible] = useState(false);
+  const visibleReducer = (state: any, action: any) => {
+    switch (action.type) {
+      case "setVisible":
+        return action.value;
+      default:
+        return state;
+    }
+  };
+
+  const [visible, dispatch] = useReducer(visibleReducer, false);
 
   const INFO_TITLE = "Welcome to Chains habit tracker!";
   const INFO_TEXT = `Chains works by building strong patterns of habits to get into and makes it easier to make big changes.
@@ -28,7 +29,7 @@ Long press a habit to edit or delete it.
 Any feedback, questions, problems you have, or things you want to see please email me at: callumc11@gmail.com :)`;
 
   const handleOK = () => {
-    setVisible(false);
+    dispatch({ type: "setVisible", value: true });
   };
 
   const infoDialogProps: IInfoDialogProps = {
@@ -44,7 +45,7 @@ Any feedback, questions, problems you have, or things you want to see please ema
         name={"information-circle-outline"}
         size={32}
         color={CLOUDS_WHITE}
-        onPress={() => setVisible(true)}
+        onPress={() => dispatch({ type: "setVisible", value: true })}
         style={{ position: "absolute", right: 10 }}
       />
       {visible && <InfoDialog {...infoDialogProps} />}
