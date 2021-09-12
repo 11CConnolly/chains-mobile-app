@@ -1,6 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import MainScreen from "./MainScreen";
+import ChainsScreen from "./ChainsScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { ALIZARIN_RED } from "../common/styles";
@@ -26,15 +26,6 @@ const TabNavigator = () => {
               case "Milestones":
                 iconName = focused ? "ribbon" : "ribbon-outline";
                 break;
-              case "Charts":
-                iconName = focused ? "bar-chart" : "bar-chart-outline";
-                break;
-              case "Calendar":
-                iconName = focused ? "calendar" : "calendar-outline";
-                break;
-              case "Account":
-                iconName = focused ? "person" : "person-outline";
-                break;
               default:
                 break;
             }
@@ -47,7 +38,7 @@ const TabNavigator = () => {
           inactiveTintColor: "gray",
         }}
       >
-        <Tab.Screen name="Chains" component={MainScreen}></Tab.Screen>
+        <Tab.Screen name="Chains" component={ChainsScreen}></Tab.Screen>
         <Tab.Screen name="Milestones" component={MilestonesScreen}></Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>
