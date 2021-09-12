@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import Dialog from "react-native-dialog";
-import { ALIZARIN_RED } from "../../common/styles";
+import { COLOURS } from "../../common/constants";
 
 export interface IDeleteDialogBoxProps {
   title: string;
@@ -9,6 +9,8 @@ export interface IDeleteDialogBoxProps {
   noButtonPress: Function;
   yesButtonPress: Function;
 }
+
+const { ALIZARIN_RED } = COLOURS;
 
 const DeleteDialogBox = (props: IDeleteDialogBoxProps) => {
   let { title, visible, noButtonPress, yesButtonPress } = props;

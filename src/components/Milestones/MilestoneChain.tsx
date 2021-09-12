@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { ScrollView, Text, View } from "react-native";
-import styles from "../../common/styles";
+import styles from "../../common/MainStyles";
 import { HabitContext } from "../../state/HabitContext";
 import CustomText from "../common/CustomText";
 import Milestone, { IMilestone } from "./Milestone";

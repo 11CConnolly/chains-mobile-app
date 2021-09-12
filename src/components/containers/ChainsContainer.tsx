@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { View, ScrollView } from "react-native";
-import styles, { BLACK } from "../../common/styles";
+import styles from "../../common/MainStyles";
 import AddChainButton from "../chains/AddChainButton";
 import Chain from "../chains/Chain";
 import { HabitContext } from "../../state/HabitContext";

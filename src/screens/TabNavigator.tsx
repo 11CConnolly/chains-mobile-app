@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ChainsScreen from "./ChainsScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import { ALIZARIN_RED } from "../common/styles";
+import { COLOURS } from "../common/constants";
 import MilestonesScreen from "./MilestonesScreen";
 
 const Tab = createBottomTabNavigator();
@@ -32,11 +32,16 @@ const TabNavigator = () => {
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
+          tabBarActiveTintColor: "#e74c3c",
+          tabBarInactiveTintColor: "gray",
+          tabBarStyle: [
+            {
+              display: "flex",
+            },
+            null,
+          ],
+          headerShown: false,
         })}
-        tabBarOptions={{
-          activeTintColor: ALIZARIN_RED,
-          inactiveTintColor: "gray",
-        }}
       >
         <Tab.Screen name="Chains" component={ChainsScreen}></Tab.Screen>
         <Tab.Screen name="Milestones" component={MilestonesScreen}></Tab.Screen>

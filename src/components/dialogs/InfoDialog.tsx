@@ -1,7 +1,9 @@
 import React from "react";
 import { View } from "react-native";
 import Dialog from "react-native-dialog";
-import { ALIZARIN_RED } from "../../common/styles";
+import { COLOURS } from "../../common/constants";
+
+const { ALIZARIN_RED } = COLOURS;
 
 export interface IInfoDialogProps {
   title: string;

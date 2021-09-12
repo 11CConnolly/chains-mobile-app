@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView } from "react-native";
 import ChainsContainer from "../components/containers/ChainsContainer";
 import TopBar from "../components/chains/TopBar";
-import styles from "../common/styles";
+import styles from "../common/MainStyles";
 
 const MainScreen = () => {
   return (

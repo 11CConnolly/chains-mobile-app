@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { View, Text } from "react-native";
-import styles, { BLACK, CLOUDS_WHITE, LIGHT_GREEN } from "../../common/styles";
+import styles from "../../common/MainStyles";
+import { COLOURS } from "../../common/constants";
 import { HabitContext } from "../../state/HabitContext";
 import { useFonts, Kalam_300Light } from "@expo-google-fonts/kalam";
 import * as Animatable from "react-native-animatable";
@@ -8,6 +9,8 @@ import { sleep } from "../../common/utils";
 import Toast from "react-native-toast-message";
 import { Ionicons } from "@expo/vector-icons";
 import InformationIcon from "../InformationIcon";
+
+const { BLACK, LIGHT_GREEN, CLOUDS_WHITE } = COLOURS;
 
 const TopBar = (props: any) => {
   const { chains } = useContext(HabitContext);

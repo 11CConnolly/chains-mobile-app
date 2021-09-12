@@ -31,12 +31,6 @@
     "web": {
       "favicon": "./assets/chains-blank.png"
     },
-    "description": "Chains is a simple habit tracker which breaks down big changes into easy to manage chains of habits",
-    "scripts": {
-      "test": "jest"
-    },
-    "jest": {
-      "preset": "jest-expo"
-    }
+    "description": "Chains is a simple habit tracker which breaks down big changes into easy to manage chains of habits"
   }
 }

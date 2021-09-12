@@ -1,6 +1,6 @@
 import React from "react";
 import { SafeAreaView } from "react-native";
-import styles from "../common/styles";
+import styles from "../common/MainStyles";
 import MilestonesContainer from "../components/containers/MilestonesContainer";
 
 const MilestonesScreen = () => {

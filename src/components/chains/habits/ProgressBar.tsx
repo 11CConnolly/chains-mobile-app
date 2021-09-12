@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import styles from "../../../common/styles";
+import styles from "../../../common/MainStyles";
 
 export interface IProgressBar {
   inProgress: boolean;

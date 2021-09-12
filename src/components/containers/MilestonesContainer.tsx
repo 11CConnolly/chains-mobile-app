@@ -2,12 +2,15 @@ import React, { useContext, useState } from "react";
 import { View, Dimensions } from "react-native";
 import { ContributionGraph } from "react-native-chart-kit";
 import { ScrollView } from "react-native-gesture-handler";
-import styles, { MIDNIGHT_BLUE } from "../../common/styles";
+import styles from "../../common/MilestoneStyles";
+import { COLOURS } from "../../common/constants";
 import { HabitContext } from "../../state/HabitContext";
 import MilestoneChain, {
   IMilestoneChain,
   TYPE_TO_CHECK,
 } from "../Milestones/MilestoneChain";
+
+const { MIDNIGHT_BLUE } = COLOURS;
 
 export interface ICommit {
   date: string;

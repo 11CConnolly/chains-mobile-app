@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { TouchableOpacity } from "react-native";
-import styles from "../../../common/styles";
+import styles from "../../../common/MainStyles";
 import DialogBox, { IDialogBoxProps } from "../../dialogs/DialogBox";
 import { HabitContext } from "../../../state/HabitContext";
 import CustomText from "../../common/CustomText";

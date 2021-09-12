@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState, useReducer } from "react";
-import { CLOUDS_WHITE } from "../common/styles";
+import { COLOURS } from "../common/constants";
 import InfoDialog, { IInfoDialogProps } from "./dialogs/InfoDialog";
 
 const InformationIcon = () => {
@@ -44,7 +44,7 @@ Any feedback, questions, problems you have, or things you want to see please ema
       <Ionicons
         name={"information-circle-outline"}
         size={32}
-        color={CLOUDS_WHITE}
+        color={COLOURS.CLOUDS_WHITE}
         onPress={() => dispatch({ type: "setVisible", value: true })}
         style={{ position: "absolute", right: 10 }}
       />

@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
-import styles from "../../common/styles";
+import styles from "../../common/MainStyles";
+import MilestoneStyles from "../../common/MilestoneStyles";
 import ProgressBar from "../chains/habits/ProgressBar";
 import CustomText from "../common/CustomText";
 
@@ -18,7 +19,7 @@ const Milestone = (props: IMilestone) => {
       <View
         style={[styles.habit, isComplete ? styles.complete : styles.incomplete]}
       >
-        <View style={styles.milestoneCircle}></View>
+        <View style={MilestoneStyles.milestoneCircle}></View>
         <CustomText
           sansSerif
           maxFontSizeMultiplier={0}

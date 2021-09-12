@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { TouchableOpacity } from "react-native";
 import * as Animatable from "react-native-animatable";
 import CustomText from "../../common/CustomText";
-import styles from "../../../common/styles";
+import styles from "../../../common/MainStyles";
 import DialogBox, { IDialogBoxProps } from "../../dialogs/DialogBox";
 import ProgressBar from "./ProgressBar";
 import Toast from "react-native-toast-message";

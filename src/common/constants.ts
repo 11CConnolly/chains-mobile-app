@@ -1,5 +1,16 @@
 import { IChain } from "../components/chains/Chain";
 
+export const COLOURS = {
+  ALIZARIN_RED: "#e74c3c",
+  BLACK: "#000000",
+  CLOUDS_WHITE: "#ecf0f1",
+  LIGHT_GREEN: "#2ecc71",
+  MIDNIGHT_BLUE: "#2c3e50",
+  PURPLE: "#a15dbd",
+};
+
+export const CHAIN_SIZE = 80;
+
 export const InitialChains: IChain[] = [
   {
     title: "Morning",
