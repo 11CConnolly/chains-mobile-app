@@ -2,7 +2,7 @@
   "expo": {
     "name": "Chains Habit Tracker",
     "slug": "chains-mobile-app",
-    "version": "1.0.0",
+    "version": "1.3.0",
     "orientation": "portrait",
     "icon": "./assets/chains-sq.png",
     "splash": {
@@ -16,12 +16,12 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.callumc11.chainsmobileapp",
-      "buildNumber": "1.0.2",
+      "buildNumber": "1.3.0",
       "supportsTablet": true
     },
     "android": {
       "package": "com.callumc11.chainsmobileapp",
-      "versionCode": 2,
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/chains-foreground.png",
         "backgroundColor": "#a15dbd"
