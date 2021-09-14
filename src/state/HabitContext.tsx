@@ -30,8 +30,8 @@ export const HabitContext = createContext<IContextProps>({
 export const HabitProvider = (props: any) => {
   const [chains, setChains] = useState<IChain[]>([]);
   const [chartCommitData, setChartCommitData] = useState<ICommit[]>([
-    { date: "Thu Aug 9 2001", count: 0 },
-    { date: "Fri Aug 10 2001", count: 1 },
+    { date: "Thu Aug 9 2020", count: 1 },
+    { date: "Fri Aug 10 2020", count: 2 },
   ]);
 
   const [dailyChainsNum, setDailyChainsNum] = useState<number>(0);
