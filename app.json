@@ -2,7 +2,7 @@
   "expo": {
     "name": "Chains Habit Tracker",
     "slug": "chains-mobile-app",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "orientation": "portrait",
     "icon": "./assets/chains-sq.png",
     "splash": {
@@ -21,9 +21,9 @@
     },
     "android": {
       "package": "com.callumc11.chainsmobileapp",
-      "versionCode": 3,
+      "versionCode": 4,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/chains-foreground.png",
+        "foregroundImage": "./assets/chains-sq-app-icon-foreground.png",
         "backgroundColor": "#a15dbd"
       },
       "permissions": []
