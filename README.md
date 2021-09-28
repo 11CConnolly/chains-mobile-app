@@ -6,4 +6,4 @@ Chains makes habit tracking easier and more motivational, allowing users to crea
 
 Chains is a mobile app currently in development for iOS and Android. Built using react-native and expo. 
 
-Chains is currently being released on Android on the App Store
+Chains is currently being released on Android on the App Store. Download it for free here: https://play.google.com/store/apps/details?id=com.callumc11.chainsmobileapp
